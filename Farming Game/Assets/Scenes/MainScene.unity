@@ -19950,7 +19950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &182144682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20774,6 +20774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517293391}
   - component: {fileID: 517293390}
+  - component: {fileID: 517293392}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -20808,6 +20809,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &517293392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517293389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb0abb5fe2ab9f4a8c6b959234d0005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 688910414}
+  slotPrefab: {fileID: 5122705098629898789, guid: b387addcb635d5f488d5d31123b2fdfa, type: 3}
+  slotCount: 24
+  itemPrefabs:
+  - {fileID: 4156163632721971579, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
 --- !u!1 &530029578
 GameObject:
   m_ObjectHideFlags: 0
@@ -21262,6 +21280,7 @@ GameObject:
   - component: {fileID: 688910415}
   - component: {fileID: 688910417}
   - component: {fileID: 688910416}
+  - component: {fileID: 688910418}
   m_Layer: 5
   m_Name: Inventory Page
   m_TagString: Untagged
@@ -21301,7 +21320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.17101282, g: 0.5754717, b: 0.2707023, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -21326,6 +21345,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 688910414}
   m_CullTransparentMesh: 1
+--- !u!114 &688910418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688910414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 100
+    m_Right: 100
+    m_Top: 100
+    m_Bottom: 100
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 100, y: 100}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &793402162
 GameObject:
   m_ObjectHideFlags: 0
@@ -21343,7 +21386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &793402163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22968,7 +23011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1799339337
 RectTransform:
   m_ObjectHideFlags: 0
