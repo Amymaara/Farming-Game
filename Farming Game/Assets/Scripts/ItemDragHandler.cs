@@ -28,12 +28,23 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         canvasGroup.alpha = 1f; // no longer transparent 
 
         Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>(); // slot where item dropped
+        if (dropSlot == null)
+        {
+            GameObject dropItem = eventData.pointerEnter;
+            if (dropItem != null)
+            {
+                dropSlot = dropItem.GetComponentInParent<Slot>();
+            }
+        }
+        
+        
         Slot originalSlot = originalParent.GetComponent<Slot>();
 
         if (dropSlot != null)
         {
             if (dropSlot.currentItem != null)
             {
+                // slot has an item - swap items 
                 dropSlot.currentItem.transform.SetParent(originalSlot.transform);
                 originalSlot.currentItem = dropSlot.currentItem;
                 dropSlot.currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -44,16 +55,19 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 originalSlot.currentItem = null;
             }
 
+            // move items into drop slot
+
             transform.SetParent(dropSlot.transform);
             dropSlot.currentItem = gameObject;
         }
 
         else
         {
+            // no slot under drop point
             transform.SetParent(originalParent);
         }
 
-        GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        GetComponent<RectTransform>().anchoredPosition = Vector2.zero; // centers
 
     }
 
