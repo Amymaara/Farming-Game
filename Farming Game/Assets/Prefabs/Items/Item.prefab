@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6679622407529984887}
   - component: {fileID: -8434602477528994492}
   - component: {fileID: -7668488214288841644}
+  - component: {fileID: 9194305128284002712}
   m_Layer: 5
   m_Name: Item
   m_TagString: Item
@@ -104,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1eb1d785bfbea7419b3f5dc73755db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minDropDistance: 2
+  maxDropDistance: 3
 --- !u!114 &6679622407529984887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +212,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &9194305128284002712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4156163632721971579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21073cd20b27e5d4e8f3113f39e8b681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceHeight: 0.3
+  bounceDuration: 0.4
+  bounceCount: 2
