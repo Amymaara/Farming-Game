@@ -6,4 +6,5 @@ public class SaveData
     public Vector3 playerPosition;
     public string mapBoundary; // boundary name for map
     public List<InventorySaveData> inventorySaveData;
+    public List<InventorySaveData> hotbarSaveData;
 }

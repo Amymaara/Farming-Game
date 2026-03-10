@@ -134,6 +134,7 @@ public class SaveController : MonoBehaviour
 
     private string saveLocation;
     private InventoryController inventoryController;
+    private HotbarController hotbarController;
 
     private void Awake()
     {
@@ -143,6 +144,7 @@ public class SaveController : MonoBehaviour
     private void Start()
     {
         inventoryController = FindObjectOfType<InventoryController>();
+        hotbarController = FindObjectOfType<HotbarController>();
         StartCoroutine(LoadAfterSetup());
     }
 
@@ -162,7 +164,8 @@ public class SaveController : MonoBehaviour
         {
             playerPosition = player.transform.position,
             mapBoundary = confiner.BoundingShape2D.gameObject.name,
-            inventorySaveData = inventoryController.GetInventoryItems()
+            inventorySaveData = inventoryController.GetInventoryItems(),
+            hotbarSaveData = hotbarController.GetHotbarItems(),
         };
 
         string json = JsonUtility.ToJson(saveData, true);
@@ -235,6 +238,14 @@ public class SaveController : MonoBehaviour
         }
 
         Debug.Log("Load complete.");
+
+        // HOTBAR 
+        if (hotbarController != null)
+        {
+            hotbarController.SetHotbarItems(saveData.hotbarSaveData);
+
+        }
+
     }
 
     public void ClearSave()
