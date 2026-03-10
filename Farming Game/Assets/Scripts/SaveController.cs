@@ -1,5 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using NUnit.Framework;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -135,6 +138,7 @@ public class SaveController : MonoBehaviour
     private string saveLocation;
     private InventoryController inventoryController;
     private HotbarController hotbarController;
+    private Chest[] chests;
 
     private void Awake()
     {
@@ -145,8 +149,11 @@ public class SaveController : MonoBehaviour
     {
         inventoryController = FindObjectOfType<InventoryController>();
         hotbarController = FindObjectOfType<HotbarController>();
+        chests = FindObjectsOfType<Chest>();
         StartCoroutine(LoadAfterSetup());
+        
     }
+
 
     private IEnumerator LoadAfterSetup()
     {
@@ -166,6 +173,7 @@ public class SaveController : MonoBehaviour
             mapBoundary = confiner.BoundingShape2D.gameObject.name,
             inventorySaveData = inventoryController.GetInventoryItems(),
             hotbarSaveData = hotbarController.GetHotbarItems(),
+            chestSaveData = GetChestsState()
         };
 
         string json = JsonUtility.ToJson(saveData, true);
@@ -174,6 +182,24 @@ public class SaveController : MonoBehaviour
         Debug.Log("Game saved.");
         Debug.Log("Saved inventory count: " + saveData.inventorySaveData.Count);
         Debug.Log(json);
+    }
+
+    private List<ChestSaveData> GetChestsState()
+    {
+        List<ChestSaveData> chestStates = new List<ChestSaveData>();
+
+        foreach (Chest chest in chests)
+        {
+            ChestSaveData chestSaveData = new ChestSaveData
+            {
+                chestID = chest.ChestID,
+                isOpened = chest.IsOpened
+            };
+
+            chestStates.Add(chestSaveData);
+        }
+        return chestStates;
+        
     }
 
     public void LoadGame()
@@ -246,6 +272,23 @@ public class SaveController : MonoBehaviour
 
         }
 
+        // CHESTS
+
+        LoadChestStates(saveData.chestSaveData);
+
+    }
+
+    private void LoadChestStates(List<ChestSaveData> chestStates)
+    {
+        foreach (Chest chest in chests)
+        {
+            ChestSaveData chestSaveData = chestStates.FirstOrDefault(c => c.chestID == chest.ChestID);
+
+            if (chestSaveData != null)
+            {
+                chest.SetOpened(chestSaveData.isOpened);
+            }
+        }
     }
 
     public void ClearSave()
