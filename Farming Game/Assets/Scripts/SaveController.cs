@@ -1,10 +1,11 @@
+using System.Collections;
 using System.IO;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class SaveController : MonoBehaviour
 {
-    private string saveLocation;
+    /* private string saveLocation;
     private InventoryController inventoryController;
 
     private void Start()
@@ -129,6 +130,122 @@ public class SaveController : MonoBehaviour
 
         inventoryController.SetInventoryItems(saveData.inventorySaveData);
     }
+    */
 
+    private string saveLocation;
+    private InventoryController inventoryController;
+
+    private void Awake()
+    {
+        saveLocation = Path.Combine(Application.persistentDataPath, "saveData.json");
+    }
+
+    private void Start()
+    {
+        inventoryController = FindObjectOfType<InventoryController>();
+        StartCoroutine(LoadAfterSetup());
+    }
+
+    private IEnumerator LoadAfterSetup()
+    {
+        yield return null; // wait 1 frame so inventory + UI are ready
+        LoadGame();
+    }
+
+    public void SaveGame()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        CinemachineConfiner2D confiner = FindFirstObjectByType<CinemachineConfiner2D>();
+
+
+        SaveData saveData = new SaveData
+        {
+            playerPosition = player.transform.position,
+            mapBoundary = confiner.BoundingShape2D.gameObject.name,
+            inventorySaveData = inventoryController.GetInventoryItems()
+        };
+
+        string json = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(saveLocation, json);
+
+        Debug.Log("Game saved.");
+        Debug.Log("Saved inventory count: " + saveData.inventorySaveData.Count);
+        Debug.Log(json);
+    }
+
+    public void LoadGame()
+    {
+   
+
+        if (!File.Exists(saveLocation))
+        {
+            Debug.LogWarning("No save file found.");
+            return;
+        }
+
+        string json = File.ReadAllText(saveLocation);
+        Debug.Log("Raw JSON: " + json);
+
+        SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+
+
+        // PLAYER
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.position = saveData.playerPosition;
+            }
+            else
+            {
+                player.transform.position = saveData.playerPosition;
+            }
+        }
+
+        // CAMERA BOUNDARY
+        CinemachineConfiner2D confiner = FindFirstObjectByType<CinemachineConfiner2D>();
+
+        if (confiner != null)
+        {
+            GameObject boundaryObject = GameObject.Find(saveData.mapBoundary);
+
+            if (boundaryObject != null)
+            {
+                PolygonCollider2D boundary = boundaryObject.GetComponent<PolygonCollider2D>();
+
+                if (boundary != null)
+                {
+                    confiner.BoundingShape2D = boundary;
+                    confiner.InvalidateBoundingShapeCache();
+
+                }
+            }
+        }
+
+        // INVENTORY
+        if (inventoryController != null)
+        {
+            inventoryController.SetInventoryItems(saveData.inventorySaveData);
+
+        }
+
+        Debug.Log("Load complete.");
+    }
+
+    public void ClearSave()
+    {
+        if (File.Exists(saveLocation))
+        {
+            File.Delete(saveLocation);
+            Debug.Log("Save file deleted.");
+        }
+    }
 }
+
+   
 
