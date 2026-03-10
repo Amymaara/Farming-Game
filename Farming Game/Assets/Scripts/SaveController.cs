@@ -5,10 +5,13 @@ using UnityEngine;
 public class SaveController : MonoBehaviour
 {
     private string saveLocation;
+    private InventoryController inventoryController;
 
     private void Start()
     {
+        inventoryController = FindObjectOfType<InventoryController>();
         LoadGame();
+        
     }
 
     private void Awake()
@@ -42,7 +45,8 @@ public class SaveController : MonoBehaviour
         SaveData saveData = new SaveData
         {
             playerPosition = player.transform.position,
-            mapBoundary = confiner.BoundingShape2D.gameObject.name
+            mapBoundary = confiner.BoundingShape2D.gameObject.name,
+            inventorySaveData = inventoryController.GetInventoryItems()
         };
 
         string json = JsonUtility.ToJson(saveData, true);
@@ -122,6 +126,8 @@ public class SaveController : MonoBehaviour
 
         Debug.Log("Camera boundary updated to: " + boundary.name);
         Debug.Log("Load complete.");
+
+        inventoryController.SetInventoryItems(saveData.inventorySaveData);
     }
 
 }
