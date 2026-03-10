@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
+  Name: Mushroom
 --- !u!212 &-8434602477528994492
 SpriteRenderer:
   m_ObjectHideFlags: 0
