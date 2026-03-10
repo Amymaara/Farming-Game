@@ -21053,6 +21053,7 @@ GameObject:
   - component: {fileID: 517293391}
   - component: {fileID: 517293390}
   - component: {fileID: 517293392}
+  - component: {fileID: 517293393}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -21103,6 +21104,18 @@ MonoBehaviour:
   inventoryPanel: {fileID: 688910414}
   slotPrefab: {fileID: 5122705098629898789, guid: b387addcb635d5f488d5d31123b2fdfa, type: 3}
   slotCount: 24
+--- !u!114 &517293393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517293389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3beb32c60bd467d40928c1949c2321b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &530029578
 GameObject:
   m_ObjectHideFlags: 0
