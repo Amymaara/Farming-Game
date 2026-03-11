@@ -174,7 +174,8 @@ public class SaveController : MonoBehaviour
             inventorySaveData = inventoryController.GetInventoryItems(),
             hotbarSaveData = hotbarController.GetHotbarItems(),
             chestSaveData = GetChestsState(),
-            questProgressData = QuestController.Instance.activateQuests
+            questProgressData = QuestController.Instance.activateQuests,
+            handInQuestIDs = QuestController.Instance.handinQuestIDs
         };
 
         string json = JsonUtility.ToJson(saveData, true);
@@ -279,6 +280,9 @@ public class SaveController : MonoBehaviour
 
         //LOAD QUEST PROGRESS
         QuestController.Instance.LoadQuestProgress(saveData.questProgressData);
+
+        // SAVE COMPLETED QUESTS
+        QuestController.Instance.handinQuestIDs = saveData.handInQuestIDs;
     }
 
     private void LoadChestStates(List<ChestSaveData> chestStates)
