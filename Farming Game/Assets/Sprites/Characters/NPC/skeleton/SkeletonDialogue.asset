@@ -18,24 +18,25 @@ MonoBehaviour:
   voiceSound: {fileID: 8300000, guid: 5f2436489d9e98049ac138bb2502ca05, type: 3}
   voicePitch: 1
   dialogueLines:
-  - I really want a flower
-  - flower power
-  - Help?
-  - Meanie :c
-  - Yay
-  - You got this
-  - You're the bestest
-  - I would give you my humerus
-  autoProgressLines: 0101000101000100
-  endDialogueLines: 0000000101010001
+  - Oh! A visitor
+  - What should I do...
+  - I really need to make this charm
+  - Tonights the festival you see..
+  - Do you mind helping me?
+  - I see... no worries
+  - Thank you! I need some flowers
+  - Have you got them yet?
+  - You're very kind.
+  autoProgressLines: 010101010100000000
+  endDialogueLines: 000000000001010100
   autoProgressDelay: 1.5
   choices:
-  - dialogueIndex: 2
+  - dialogueIndex: 4
     choices:
-    - Uh no
-    - Sure
-    nextDialogueIndexes: 0300000004000000
+    - I'm busy right now
+    - Sure why not
+    nextDialogueIndexes: 0500000006000000
     givesQuest: 0001
-  questInProgressIndex: 5
-  questCompletedIndex: 6
+  questInProgressIndex: 7
+  questCompletedIndex: 8
   quest: {fileID: 11400000, guid: 66c927248aa62fb46a9efed10f35d9f6, type: 2}
