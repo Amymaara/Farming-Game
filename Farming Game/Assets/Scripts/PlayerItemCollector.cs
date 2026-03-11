@@ -27,7 +27,7 @@ public class PlayerItemCollector : MonoBehaviour
                         QuestController.Instance.RegisterCollectedItem(item.ID, amountCollected);
                     }
 
-                    item.PickUp();
+                    item.ShowPopUp();
                     Destroy(collision.gameObject);
                 }
             }

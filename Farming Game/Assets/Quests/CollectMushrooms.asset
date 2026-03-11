@@ -21,3 +21,10 @@ MonoBehaviour:
     type: 0
     requiredAmount: 2
     currentAmount: 0
+  questRewards:
+  - type: 0
+    RewardID: 2
+    amount: 5
+  - type: 0
+    RewardID: 3
+    amount: 3
