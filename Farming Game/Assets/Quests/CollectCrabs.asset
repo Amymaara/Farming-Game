@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Get some Acorns for Kappa
   objectives:
   - objectiveID: 4
-    description: Collect 3 Acorns
+    description: Collect 3 crabs
     type: 0
     requiredAmount: 3
     currentAmount: 0

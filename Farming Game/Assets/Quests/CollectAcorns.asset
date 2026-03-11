@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Dra needs some crabs
   objectives:
   - objectiveID: 5
-    description: Collect 3 crabs
+    description: Collect 3 acorns
     type: 0
     requiredAmount: 3
     currentAmount: 0
