@@ -1,4 +1,5 @@
 using UnityEngine;
+
 // Reference:
 // Game Code Library (2026) Top Down Tutorial Series - Unity 2D
 // YouTube. Available at:
@@ -8,9 +9,8 @@ using UnityEngine;
 // Code was adapted and modified by Ammaarah Cassim for project.
 // Debugging assistance provided using ChatGPT (OpenAI).
 
-public interface IInteractable
+public class Slot : MonoBehaviour
 {
-    void Interact();
-
-    bool CanInteract();
+    public int slotIndex;
+    public GameObject currentItem; // item currently held 
 }

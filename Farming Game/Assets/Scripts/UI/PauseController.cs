@@ -1,4 +1,5 @@
 using UnityEngine;
+
 // Reference:
 // Game Code Library (2026) Top Down Tutorial Series - Unity 2D
 // YouTube. Available at:
@@ -7,10 +8,13 @@ using UnityEngine;
 // Note:
 // Code was adapted and modified by Ammaarah Cassim for project.
 // Debugging assistance provided using ChatGPT (OpenAI).
-
-public interface IInteractable
+public class PauseController : MonoBehaviour
 {
-    void Interact();
+    public static bool IsGamePaused { get; private set; } = false;
 
-    bool CanInteract();
+    public static void SetPause(bool pause)
+    {
+        IsGamePaused = pause;
+    }
+
 }
