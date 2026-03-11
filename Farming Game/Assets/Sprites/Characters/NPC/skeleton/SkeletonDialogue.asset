@@ -20,5 +20,15 @@ MonoBehaviour:
   dialogueLines:
   - I really want a flower
   - flower power
-  autoProgressLines: 0100
+  - Help?
+  - Meanie :c
+  - Yay
+  autoProgressLines: 0101000101
+  endDialogueLines: 0000000101
   autoProgressDelay: 1.5
+  choices:
+  - dialogueIndex: 2
+    choices:
+    - Uh no
+    - Sure
+    nextDialogueIndexes: 0300000004000000
