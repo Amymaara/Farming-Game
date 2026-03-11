@@ -20,11 +20,11 @@ MonoBehaviour:
   dialogueLines:
   - Oh! A visitor
   - What should I do...
-  - I really need to make this charm
+  - I really need to make this soup
   - Tonights the festival you see..
   - Do you mind helping me?
   - I see... no worries
-  - Thank you! I need some flowers
+  - Thank you! I need some mushrooms
   - Have you got them yet?
   - You're very kind.
   autoProgressLines: 010101010100000000

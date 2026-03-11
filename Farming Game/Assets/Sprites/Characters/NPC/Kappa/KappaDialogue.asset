@@ -18,16 +18,24 @@ MonoBehaviour:
   voiceSound: {fileID: 8300000, guid: 5f2436489d9e98049ac138bb2502ca05, type: 3}
   voicePitch: 1
   dialogueLines:
-  - 
-  - 
-  autoProgressLines: 0000
-  endDialogueLines: 0000
+  - Yo
+  - You busy?
+  - Find me some acorns?
+  - Sweet, check forest
+  - 'bottom left '
+  - No worries my guy
+  - Have you got them yet?
+  - Hell yeah thank you
+  autoProgressLines: 0101000100000000
+  endDialogueLines: 0000000000010001
   autoProgressDelay: 1.5
   choices:
-  - dialogueIndex: 0
-    choices: []
-    nextDialogueIndexes: 
+  - dialogueIndex: 2
+    choices:
+    - Nah
+    - Yah dude i got you
+    nextDialogueIndexes: 0500000003000000
     givesQuest: 
-  questInProgressIndex: 0
-  questCompletedIndex: 0
+  questInProgressIndex: 6
+  questCompletedIndex: 7
   quest: {fileID: 0}
