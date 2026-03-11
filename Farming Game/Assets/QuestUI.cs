@@ -9,6 +9,7 @@ public class QuestUI : MonoBehaviour
     public GameObject questEntryPrefab;
     public GameObject objectiveTextPrefab;
 
+    // var to test specific quets
     public Quests testQuest;
     public int testQuestAmount;
     private List<QuestProgress> testQuests = new();
@@ -17,7 +18,7 @@ public class QuestUI : MonoBehaviour
     {
         for (int i = 0; i < testQuestAmount; i++)
         {
-            testQuests.Add(new QuestProgress(testQuest));
+            testQuests.Add(new QuestProgress(testQuest)); // testing specific quests
         }
         UpdateQuestUI();
     }
@@ -31,7 +32,7 @@ public class QuestUI : MonoBehaviour
         }
 
         //build quest entries
-        foreach (var quest in testQuests)
+        foreach (var quest in QuestController.Instance.activatQuests) // chnage var quest in (test quest) to test specific quests
         {
             GameObject entry = Instantiate(questEntryPrefab, questListContent);
             TMP_Text questNameText = entry.transform.Find("QuestNameText").GetComponent<TMP_Text>();

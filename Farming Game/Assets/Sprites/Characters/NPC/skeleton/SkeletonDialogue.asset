@@ -23,8 +23,11 @@ MonoBehaviour:
   - Help?
   - Meanie :c
   - Yay
-  autoProgressLines: 0101000101
-  endDialogueLines: 0000000101
+  - You got this
+  - You're the bestest
+  - I would give you my humerus
+  autoProgressLines: 0101000101000100
+  endDialogueLines: 0000000101010001
   autoProgressDelay: 1.5
   choices:
   - dialogueIndex: 2
@@ -32,3 +35,7 @@ MonoBehaviour:
     - Uh no
     - Sure
     nextDialogueIndexes: 0300000004000000
+    givesQuest: 0001
+  questInProgressIndex: 5
+  questCompletedIndex: 6
+  quest: {fileID: 11400000, guid: 66c927248aa62fb46a9efed10f35d9f6, type: 2}

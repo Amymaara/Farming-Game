@@ -15,6 +15,10 @@ public class NpcDialogue : ScriptableObject
     public float autoProgressDelay = 1.5f;
 
     public DialogueChoice[] choices;
+
+    public int questInProgressIndex; // what npc says while quest in progress
+    public int questCompletedIndex; // what npc says when quest completed
+    public Quests quest; // Quest NPC gives
 }
 
 [System.Serializable]
@@ -24,5 +28,6 @@ public class DialogueChoice
     public int dialogueIndex; // dialogue line where choice appears
     public string[] choices; // player response 
     public int[] nextDialogueIndexes; // where choice leads
+    public bool[] givesQuest;
 
 }

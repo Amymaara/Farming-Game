@@ -12,6 +12,9 @@ public class NPC : MonoBehaviour, IInteractable
     private int dialogueIndex;
     private bool isTyping, isDialogueActive;
 
+    private enum QuestState { NotStarted, InProgress, Completed}
+    private QuestState questState = QuestState.NotStarted;
+
     private void Start()
     {
         dialogueController = DialogueController.Instance;
@@ -39,16 +42,49 @@ public class NPC : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
-        isDialogueActive = true;
-        dialogueIndex = 0;
+        //sync with quest data
+        SyncQuestState();
 
-        
+        // set dialogue line based on questState
+        if (questState == QuestState.NotStarted)
+        {
+            dialogueIndex = 0;
+        }
+
+        else if (questState == QuestState.InProgress)
+        {
+            dialogueIndex = dialogueData.questInProgressIndex;
+
+        }
+
+        else if (questState == QuestState.Completed)
+        {
+            dialogueIndex = dialogueData.questCompletedIndex;
+        }
+        isDialogueActive = true;
+
         dialogueController.SetNPCInfo(dialogueData.npcName, dialogueData.npcPortrait);
         dialogueController.ShowDialogueUI(true);
         PauseController.SetPause(true);
 
         DisplayCurrentLine();
 
+    }
+
+    private void SyncQuestState()
+    {
+        if (dialogueData.quest == null) return;
+
+        string questID = dialogueData.quest.questID;
+        if (QuestController.Instance.IsQuestActive(questID))
+        {
+            questState = QuestState.InProgress;
+        }
+
+        else
+        {
+            questState = QuestState.NotStarted;
+        }
     }
 
     void NextLine()
@@ -116,8 +152,13 @@ public class NPC : MonoBehaviour, IInteractable
         }
     }
 
-    void ChooseOption(int nextIndex)
+    void ChooseOption(int nextIndex, bool givesQuest)
     {
+        if (givesQuest)
+        {
+            QuestController.Instance.AcceptQuest(dialogueData.quest);
+            questState = QuestState.InProgress;
+        }
         dialogueIndex = nextIndex;
         dialogueController.ClearChoices();
         DisplayCurrentLine();
@@ -135,7 +176,8 @@ public class NPC : MonoBehaviour, IInteractable
         for (int i = 0; i < choice.choices.Length; i++)
         {
             int nextIndex = choice.nextDialogueIndexes[i];
-            dialogueController.CreateChoiceButton(choice.choices[i], () => ChooseOption(nextIndex) );
+            bool givesQuest = choice.givesQuest[i];
+            dialogueController.CreateChoiceButton(choice.choices[i], () => ChooseOption(nextIndex, givesQuest) );
         }
     }
     public void EndDialogue()
