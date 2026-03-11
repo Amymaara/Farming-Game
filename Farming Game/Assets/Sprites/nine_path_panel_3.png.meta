@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b70faf6784d2b844b902cfa4c65b7792
+guid: eaf6391c0ee7c6a43902aa20a81e07fb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5256508804588260846
-    second: DialogueBoxSimple_0
+      213: 5390783525562030341
+    second: nine_path_panel_3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,11 +48,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 6, y: 5, z: 5, w: 6}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DialogueBoxSimple_0
+      name: nine_path_panel_3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 316
-        height: 60
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 212bdc7a7112d07b0800000000000000
-      internalID: -5256508804588260846
+      spriteID: 509172e0e09efca40800000000000000
+      internalID: 5390783525562030341
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DialogueBoxSimple_0: -5256508804588260846
+      nine_path_panel_3_0: 5390783525562030341
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
