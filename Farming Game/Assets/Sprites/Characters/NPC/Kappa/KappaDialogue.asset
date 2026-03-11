@@ -27,7 +27,7 @@ MonoBehaviour:
   - Have you got them yet?
   - Hell yeah thank you
   autoProgressLines: 0101000100000000
-  endDialogueLines: 0000000000010001
+  endDialogueLines: 0000000001010001
   autoProgressDelay: 1.5
   choices:
   - dialogueIndex: 2
@@ -35,7 +35,7 @@ MonoBehaviour:
     - Nah
     - Yah dude i got you
     nextDialogueIndexes: 0500000003000000
-    givesQuest: 
+    givesQuest: 0001
   questInProgressIndex: 6
   questCompletedIndex: 7
-  quest: {fileID: 0}
+  quest: {fileID: 11400000, guid: c8495f7511f86694a84303173f8129b2, type: 2}

@@ -15,7 +15,7 @@ public class NPC : MonoBehaviour, IInteractable
     private enum QuestState { NotStarted, InProgress, Completed}
     private QuestState questState = QuestState.NotStarted;
 
-    private void Start()
+    private void Awake()
     {
         dialogueController = DialogueController.Instance;
     }
@@ -42,6 +42,15 @@ public class NPC : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
+        if (dialogueController == null)
+            dialogueController = DialogueController.Instance;
+
+        if (dialogueController == null)
+        {
+            Debug.LogError($"DialogueController missing for NPC: {gameObject.name}");
+            return;
+        }
+
         //sync with quest data
         SyncQuestState();
 
@@ -63,6 +72,7 @@ public class NPC : MonoBehaviour, IInteractable
         }
 
         isDialogueActive = true;
+
 
         dialogueController.SetNPCInfo(dialogueData.npcName, dialogueData.npcPortrait);
         dialogueController.ShowDialogueUI(true);
@@ -97,6 +107,15 @@ public class NPC : MonoBehaviour, IInteractable
 
     void NextLine()
     {
+        if (dialogueController == null)
+            dialogueController = DialogueController.Instance;
+
+        if (dialogueController == null)
+        {
+            Debug.LogError($"DialogueController missing in NextLine for NPC: {gameObject.name}");
+            return;
+        }
+
         if (isTyping)
         {
             //skip animation and show full line
@@ -151,7 +170,7 @@ public class NPC : MonoBehaviour, IInteractable
 
         isTyping = false;
 
-        if (dialogueData.autoProgressLines.Length > dialogueIndex & dialogueData.autoProgressLines[dialogueIndex])
+        if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
         {
             yield return new WaitForSeconds(dialogueData.autoProgressDelay);
 
@@ -167,6 +186,11 @@ public class NPC : MonoBehaviour, IInteractable
             QuestController.Instance.AcceptQuest(dialogueData.quest);
             questState = QuestState.InProgress;
         }
+        else
+        {
+            Debug.LogWarning($"{gameObject.name} tried to give a quest, but no quest is assigned.");
+        }
+
         dialogueIndex = nextIndex;
         dialogueController.ClearChoices();
         DisplayCurrentLine();
@@ -201,8 +225,15 @@ public class NPC : MonoBehaviour, IInteractable
 
         StopAllCoroutines();
         isDialogueActive = false;
-        dialogueController.SetDialogueText("");
-        dialogueController.ShowDialogueUI(false);
+        if (dialogueController == null)
+            dialogueController = DialogueController.Instance;
+
+        if (dialogueController != null)
+        {
+            dialogueController.SetDialogueText("");
+            dialogueController.ShowDialogueUI(false);
+        }
+
         PauseController.SetPause(false);
     }
 

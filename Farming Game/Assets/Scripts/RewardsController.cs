@@ -55,7 +55,27 @@ public class RewardsController : MonoBehaviour
            else
             {
                 // show notification popup
-                itemPrefab.GetComponent<Item>().ShowPopUp();
+                Item item = itemPrefab.GetComponent<Item>();
+                if (item != null && ItemPickupUIController.Instance != null)
+                {
+                    Sprite icon = null;
+
+                    SpriteRenderer sr = itemPrefab.GetComponent<SpriteRenderer>();
+                    if (sr != null)
+                    {
+                        icon = sr.sprite;
+                    }
+                    else
+                    {
+                        UnityEngine.UI.Image img = itemPrefab.GetComponent<UnityEngine.UI.Image>();
+                        if (img != null)
+                        {
+                            icon = img.sprite;
+                        }
+                    }
+
+                    ItemPickupUIController.Instance.ShowItemPickup(item.Name, icon);
+                }
             }
         }
     }

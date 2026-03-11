@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef12394b198d426428cd6d44d830e9d0, type: 3}
-  m_Name: CollectMushrooms
+  m_Name: CollectCrabs
   m_EditorClassIdentifier: 
-  questID: a2b47a72-82cb-4a66-83ab-01f9a93bdc34
-  questName: Collect Mushrooms
-  description: Get some mushrooms for Skelly
+  questID: bd182bb0-8f8d-4495-aabc-d7c989c87e00
+  questName: Collect Acorns
+  description: Get some Acorns for Kappa
   objectives:
-  - objectiveID: 1
-    description: Collect 3 Mushrooms
+  - objectiveID: 4
+    description: Collect 3 Acorns
     type: 0
     requiredAmount: 3
     currentAmount: 0

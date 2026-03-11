@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef12394b198d426428cd6d44d830e9d0, type: 3}
-  m_Name: CollectMushrooms
+  m_Name: CollectFlowers
   m_EditorClassIdentifier: 
-  questID: a2b47a72-82cb-4a66-83ab-01f9a93bdc34
-  questName: Collect Mushrooms
-  description: Get some mushrooms for Skelly
+  questID: 19d676c3-232d-4627-af28-93aba7ceb4b0
+  questName: Collect Flowers
+  description: Collect flowers for Gon
   objectives:
-  - objectiveID: 1
-    description: Collect 3 Mushrooms
+  - objectiveID: 2
+    description: Collect 3 Flowers
     type: 0
     requiredAmount: 3
     currentAmount: 0

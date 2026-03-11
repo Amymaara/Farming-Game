@@ -20635,7 +20635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7783c1dbd7b0a7248a6cdfded24b91af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueData: {fileID: 11400000, guid: 56b73bfbc1dd89542a14caa116e683e1, type: 2}
+  dialogueData: {fileID: 11400000, guid: b881e25c8aa8ca34cb941a4740f7a11e, type: 2}
 --- !u!61 &217666404
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31207,7 +31207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7783c1dbd7b0a7248a6cdfded24b91af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueData: {fileID: 11400000, guid: 56b73bfbc1dd89542a14caa116e683e1, type: 2}
+  dialogueData: {fileID: 11400000, guid: e179b980f88adb64e8a06d3feb8a822b, type: 2}
 --- !u!61 &1497776241
 BoxCollider2D:
   m_ObjectHideFlags: 0

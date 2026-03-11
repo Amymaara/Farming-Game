@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef12394b198d426428cd6d44d830e9d0, type: 3}
-  m_Name: CollectMushrooms
+  m_Name: CollectAcorns
   m_EditorClassIdentifier: 
-  questID: a2b47a72-82cb-4a66-83ab-01f9a93bdc34
-  questName: Collect Mushrooms
-  description: Get some mushrooms for Skelly
+  questID: a88b2775-c8b7-48d4-a04d-4f6a1a6b9e89
+  questName: Collect Crabs
+  description: Dra needs some crabs
   objectives:
-  - objectiveID: 1
-    description: Collect 3 Mushrooms
+  - objectiveID: 5
+    description: Collect 3 crabs
     type: 0
     requiredAmount: 3
     currentAmount: 0

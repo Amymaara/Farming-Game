@@ -12,16 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f48d2a9ef545b4584ce29e5ebbbe7a, type: 3}
   m_Name: GonDialogue
   m_EditorClassIdentifier: 
-  npcName: 
-  npcPortrait: {fileID: 0}
+  npcName: Gon
+  npcPortrait: {fileID: 21300000, guid: 8a347078d9422e44fb11febd9443ac7e, type: 3}
   typingSpeed: 0.05
-  voiceSound: {fileID: 0}
+  voiceSound: {fileID: 8300000, guid: 5f2436489d9e98049ac138bb2502ca05, type: 3}
   voicePitch: 1
-  dialogueLines: []
-  autoProgressLines: 
-  endDialogueLines: 
+  dialogueLines:
+  - You know what this festival needs?
+  - Flowers.
+  - They're super pretty
+  - Mind getting me some?
+  - Slayy (not me)
+  - Check bottom right
+  - Just say you're a hater
+  - Have you collected them yet?
+  - Perfect! thank you
+  autoProgressLines: 010101000100000000
+  endDialogueLines: 000000000001010101
   autoProgressDelay: 1.5
-  choices: []
-  questInProgressIndex: 0
-  questCompletedIndex: 0
-  quest: {fileID: 0}
+  choices:
+  - dialogueIndex: 3
+    choices:
+    - Of course bestie
+    - Uhh maybe not right now
+    nextDialogueIndexes: 0400000006000000
+    givesQuest: 0100
+  questInProgressIndex: 7
+  questCompletedIndex: 8
+  quest: {fileID: 11400000, guid: 3a5288b91ceea0f42aa6806f9b491849, type: 2}
