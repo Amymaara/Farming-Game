@@ -15,18 +15,22 @@ public class PlayerItemCollector : MonoBehaviour
         if (collision.CompareTag("Item"))
         {
             Item item = collision.GetComponent<Item>();
-            if ( item != null)
+            if (item != null)
             {
                 bool itemAdded = inventoryController.AddItem(collision.gameObject);
 
                 if (itemAdded)
                 {
+                    if (QuestController.Instance != null)
+                    {
+                        int amountCollected = item.quantity > 0 ? item.quantity : 1;
+                        QuestController.Instance.RegisterCollectedItem(item.ID, amountCollected);
+                    }
+
                     item.PickUp();
                     Destroy(collision.gameObject);
                 }
             }
-
-
         }
     }
 

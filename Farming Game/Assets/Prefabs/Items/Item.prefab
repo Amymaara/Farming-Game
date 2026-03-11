@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b248c026d6564424aa91e25e400b4e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 1
   Name: Mushroom
   quantity: 0
 --- !u!212 &-8434602477528994492

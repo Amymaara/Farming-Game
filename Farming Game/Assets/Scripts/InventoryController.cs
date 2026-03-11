@@ -14,10 +14,13 @@ public class InventoryController : MonoBehaviour
     private List<Slot> slots = new List<Slot>();
 
     public static InventoryController Instance {  get; private set; }
+    Dictionary<int, int> itemsCountCache = new();
+    public event Action OnInventoryChanged; // tells quest system / other scripts what it needs to know (fetch/ collect quests)
     private void Awake()
     {
         itemDictionary = FindObjectOfType<ItemDictionary>();
         CreateSlots();
+        RebuildItemCounts();
 
         if (Instance != null && Instance != this)
         {
@@ -27,6 +30,30 @@ public class InventoryController : MonoBehaviour
 
         Instance = this;
     }
+
+    public void RebuildItemCounts()
+    {
+        itemsCountCache.Clear();
+
+        foreach (Transform slotTr in inventoryPanel.transform)
+        {
+            Slot slot = slotTr.GetComponent<Slot>();
+            if (slot.currentItem != null)
+            {
+                Item item = slot.currentItem.GetComponent<Item>();
+                if (item != null)
+                {
+                    itemsCountCache[item.ID] = itemsCountCache.GetValueOrDefault(item.ID, 0) + item.quantity;
+                    Debug.Log($"Counting item {item.name} | ID: {item.ID} | Qty: {item.quantity}");
+
+                }
+            }
+        }
+
+        OnInventoryChanged?.Invoke();
+    }
+
+    public Dictionary<int, int> GetItemCounts() => itemsCountCache;
 
     private void CreateSlots()
     {
@@ -62,6 +89,7 @@ public class InventoryController : MonoBehaviour
                 {
                     // Same item stack
                     slotItem.AddToStack(amount);
+                    RebuildItemCounts();
                     return true;
                 }
             }
@@ -85,6 +113,7 @@ public class InventoryController : MonoBehaviour
                 slot.currentItem = newItem;
 
                 Debug.Log("Item added to slot " + slot.slotIndex);
+                RebuildItemCounts();
                 return true;
             }
         }
@@ -146,7 +175,7 @@ public class InventoryController : MonoBehaviour
                 item.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
                 Item itemComponent = item.GetComponent<Item>();
-                if (itemComponent != null & data.quantity > 1)
+                if (itemComponent != null && data.quantity > 1)
                 {
                     itemComponent.quantity = data.quantity;
                     itemComponent.UpdateQuantityDisplay();
@@ -160,6 +189,8 @@ public class InventoryController : MonoBehaviour
                 Debug.LogWarning("No prefab found for item ID: " + data.itemID);
             }
         }
+
+        RebuildItemCounts();
     }
 
     public void ClearItemsOnly()

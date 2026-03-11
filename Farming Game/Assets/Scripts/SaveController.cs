@@ -173,7 +173,8 @@ public class SaveController : MonoBehaviour
             mapBoundary = confiner.BoundingShape2D.gameObject.name,
             inventorySaveData = inventoryController.GetInventoryItems(),
             hotbarSaveData = hotbarController.GetHotbarItems(),
-            chestSaveData = GetChestsState()
+            chestSaveData = GetChestsState(),
+            questProgressData = QuestController.Instance.activateQuests
         };
 
         string json = JsonUtility.ToJson(saveData, true);
@@ -276,6 +277,8 @@ public class SaveController : MonoBehaviour
 
         LoadChestStates(saveData.chestSaveData);
 
+        //LOAD QUEST PROGRESS
+        QuestController.Instance.LoadQuestProgress(saveData.questProgressData);
     }
 
     private void LoadChestStates(List<ChestSaveData> chestStates)
