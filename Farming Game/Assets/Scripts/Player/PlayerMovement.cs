@@ -1,3 +1,4 @@
+using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +18,19 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    
+
+    public InputActionReference actionInput;
+
+    public enum ToolType 
+    {
+        hoe,
+        wateringCan,
+        seeds,
+        basket,
+    }
+
+    public ToolType currentTool;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +47,14 @@ public class PlayerMovement : MonoBehaviour
         }
         rb.linearVelocity = moveInput * movementSpeed;
         animator.SetBool("isWalking", rb.linearVelocity.magnitude > 0);
+
+ 
+        
+       /* if (actionInput.action.WasPerformedThisFrame())
+        {
+            UseTool();
+        }
+       */
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -51,4 +72,18 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = moveInput.x < 0;
         }
     }
+
+    void UseTool()
+    {
+        FarmTile farmTile = null;
+        farmTile = FindFirstObjectByType<FarmTile>();
+
+       if (farmTile != null)
+        {
+
+        }
+
+
+    }
+
 }
