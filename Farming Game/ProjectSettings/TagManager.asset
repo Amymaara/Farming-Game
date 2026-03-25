@@ -45,6 +45,12 @@ TagManager:
   - name: Ground
     uniqueID: 923553769
     locked: 0
+  - name: FarmableArea
+    uniqueID: 1298801123
+    locked: 0
+  - name: FarmTiles
+    uniqueID: 199405485
+    locked: 0
   - name: WalkInFront
     uniqueID: 1996834789
     locked: 0

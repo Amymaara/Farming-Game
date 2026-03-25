@@ -50,11 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
  
         
-       /* if (actionInput.action.WasPerformedThisFrame())
-        {
-            UseTool();
-        }
-       */
+       
+       
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -73,17 +70,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void UseTool()
-    {
-        FarmTile farmTile = null;
-        farmTile = FindFirstObjectByType<FarmTile>();
-
-       if (farmTile != null)
-        {
-
-        }
-
-
-    }
+   
 
 }

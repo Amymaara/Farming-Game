@@ -63,42 +63,7 @@ public class Item : MonoBehaviour
     public virtual void UseItem()
     {
 
-        PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        FarmTile farmTile = null;
-        farmTile = FindFirstObjectByType<FarmTile>();
-
-        if (player == null)
-        {
-            Debug.LogWarning("No FarmingToolController found!");
-            return;
-        }
-
-        switch (ID)
-        {
-            case 100:
-                player.currentTool = ToolType.hoe;
-                farmTile.PloughSoil();
-                break;
-
-            case 101:
-                player.currentTool = ToolType.wateringCan;
-                Debug.Log("Equipped Watering Can");
-                break;
-
-            case 102:
-                player.currentTool = ToolType.seeds;
-                Debug.Log("Equipped Seeds");
-                break;
-
-            case 103:
-                player.currentTool = ToolType.basket;
-                Debug.Log("Equipped Basket");
-                break;
-
-            default:
-                Debug.Log("This item is not a tool.");
-                break;
-        }
+        Debug.Log("You are using an item");
     }
 
     public virtual void ShowPopUp()
