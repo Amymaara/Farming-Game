@@ -23940,6 +23940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTilemap: {fileID: 2104554344}
   farmTilemap: {fileID: 1542866635}
+  farmableTilemap: {fileID: 2104554344}
   tilledTile: {fileID: 11400000, guid: d4ba7433e9942ea4586c02c2484b0ffa, type: 2}
   wateredTile: {fileID: 11400000, guid: ff0dfb50a434ca24dbfd014da2a20ed4, type: 2}
 --- !u!114 &517293398
@@ -23956,7 +23957,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 212406896}
   mainCamera: {fileID: 228475088}
-  highlightTile: {fileID: 675246300}
+  highlightTile: {fileID: 675246302}
+  toolSelector: {fileID: 517293399}
+  farmManager: {fileID: 517293397}
 --- !u!114 &517293399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31823,76 +31826,36 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542866632}
   m_Enabled: 1
-  m_Tiles:
-  - first: {x: -2, y: -3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -1, y: -3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -2, y: -2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -1, y: -2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
+  m_Tiles: {}
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 4
-    m_Data: {fileID: 11400000, guid: 6eb9d0f708409d748a9f15aac6b01d59, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 4
-    m_Data: {fileID: -2071146129069798425, guid: 177b837e17c2d3d4d9ba2c5b83c2fcb9, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 4
+  - m_RefCount: 0
     m_Data:
-      e00: 1
+      e00: 1.427e-42
       e01: 0
-      e02: 0
-      e03: 0
+      e02: 1e-45
+      e03: -3.8750038
       e10: 0
-      e11: 1
+      e11: 0
       e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
+      e13: 6.38e-43
+      e20: -6.6802124e+27
+      e21: -3.8750038
+      e22: 2.9347658e-29
+      e23: 8.054543e-19
+      e30: 4.5915e-41
+      e31: 6.38e-43
+      e32: 6.42e-43
+      e33: 6.39e-43
   m_TileColorArray:
-  - m_RefCount: 4
-    m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 8.0545223e-19, g: 8.0545223e-19, b: 8.0545223e-19, a: 8.0545223e-19}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}

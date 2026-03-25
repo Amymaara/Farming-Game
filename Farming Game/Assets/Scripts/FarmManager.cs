@@ -5,6 +5,7 @@ public class FarmManager : MonoBehaviour
 {
     public Tilemap groundTilemap;
     public Tilemap farmTilemap;
+    public Tilemap farmableTilemap;
 
     public TileBase tilledTile;
     public TileBase wateredTile;
@@ -32,6 +33,14 @@ public class FarmManager : MonoBehaviour
             farmTilemap.SetTile(pos, wateredTile);
         }
 
+    }
+
+    public bool IsFarmable(Vector3Int cellPos)
+    {
+        bool isInFarmableArea = farmableTilemap != null && farmableTilemap.HasTile(cellPos);
+        bool isAlreadyFarmTile = farmTilemap != null && farmTilemap.HasTile(cellPos);
+
+        return isInFarmableArea || isAlreadyFarmTile;
     }
 
 }
