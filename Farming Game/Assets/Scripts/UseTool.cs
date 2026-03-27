@@ -6,6 +6,8 @@ public class UseTool : MonoBehaviour
     public ToolSelector toolSelector;
     public HighlightTile highlightTile;
     public FarmManager farmManager;
+    public CropManager cropManager;
+    public CropData selectedCrop;
 
     private void Update()
     {
@@ -38,7 +40,7 @@ public class UseTool : MonoBehaviour
 
             case ToolType.Seed:
                 Debug.Log("Seed planted");
-                // PlantSeed(targetCell);
+                cropManager.PlantCrop(targetTile, selectedCrop);
                 break;
 
             case ToolType.Basket:

@@ -51,6 +51,9 @@ TagManager:
   - name: FarmTiles
     uniqueID: 199405485
     locked: 0
+  - name: Crop Tilemap
+    uniqueID: 3795278557
+    locked: 0
   - name: WalkInFront
     uniqueID: 1996834789
     locked: 0

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ToolSelector : MonoBehaviour
 {
     public ToolType currentTool = ToolType.Default;
+   
 
     [Header("Ui for tools")]
     public Image toolSlotIcon;
@@ -94,7 +95,7 @@ public class ToolSelector : MonoBehaviour
 
             case ToolType.Seed:
                 toolSlotIcon.sprite = seedPacketSprite;
-            break;
+                break;
 
             case ToolType.Basket:
                 toolSlotIcon.sprite = basketSprite;
