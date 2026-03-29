@@ -95,17 +95,30 @@ public class CropManager : MonoBehaviour
         }
     }
 
-  /* public bool HarvestCrop(Vector3Int cellPos)
+   public bool HarvestCrop(Vector3Int cellPos)
     {
         if (!plantedCrops.ContainsKey(cellPos))
         {
             Debug.Log("nothing planted");
             return false;
         }
-    }
 
-    PlantedCrop crop = plantedCrops[cellPos];
+        PlantedCrop crop = plantedCrops[cellPos];
 
-    bool isFullyGrown = crop.currentStage >= crop.CropData.growthStageTiles.Length - 1;
-  */
+        bool isFullyGrown = crop.currentStage >= crop.cropData.growthStageTiles.Length - 1;
+
+        if (!isFullyGrown)
+        {
+            Debug.Log("Crop is not fully grown yet.");
+            return false;
+        }
+
+        cropTilemap.SetTile(cellPos, null);
+        plantedCrops.Remove(cellPos);
+
+        Debug.Log("Harvested " + crop.cropData.cropName + " x" + crop.cropData.harvestYield);
+
+        return true;
+    }    
+  
 }

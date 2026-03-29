@@ -45,7 +45,7 @@ public class UseTool : MonoBehaviour
 
             case ToolType.Basket:
                 Debug.Log("Basket used");
-                // PickupItem(targetCell);
+                cropManager.HarvestCrop(targetTile);
                 break;
             case ToolType.Sword:
                 Debug.Log("Sword used");
