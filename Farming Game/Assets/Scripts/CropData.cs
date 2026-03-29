@@ -9,4 +9,6 @@ public class CropData : ScriptableObject
     public float[] growthStageDurations;
     public int harvestYield = 1;
     public bool regrows = false;
+
+    public int harvestItemID;
 }

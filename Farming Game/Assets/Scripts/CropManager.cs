@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -93,4 +94,18 @@ public class CropManager : MonoBehaviour
             }
         }
     }
+
+  /* public bool HarvestCrop(Vector3Int cellPos)
+    {
+        if (!plantedCrops.ContainsKey(cellPos))
+        {
+            Debug.Log("nothing planted");
+            return false;
+        }
+    }
+
+    PlantedCrop crop = plantedCrops[cellPos];
+
+    bool isFullyGrown = crop.currentStage >= crop.CropData.growthStageTiles.Length - 1;
+  */
 }
