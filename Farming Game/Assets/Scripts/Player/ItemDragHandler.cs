@@ -115,56 +115,107 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     bool IsWithinInventory(Vector2 mousePosition)
     {
-        RectTransform inventoryRect = originalParent.parent.GetComponent<RectTransform>();
-        return RectTransformUtility.RectangleContainsScreenPoint(inventoryRect, mousePosition);
+        if (inventoryController == null || inventoryController.inventoryPanel == null)
+            return false;
+
+        RectTransform inventoryRect = inventoryController.inventoryPanel.GetComponent<RectTransform>();
+        if (inventoryRect == null)
+            return false;
+
+        return RectTransformUtility.RectangleContainsScreenPoint(inventoryRect, mousePosition, null);
     }
 
     void DropItem(Slot originalSlot)
     {
         Item item = GetComponent<Item>();
+        if (item == null) return;
+
         int quantity = item.quantity;
 
         if (quantity > 1)
         {
-            item.RemoveFromStack();
+            item.RemoveFromStack(1);
 
             transform.SetParent(originalParent);
             GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
             quantity = 1;
         }
-
         else
         {
             originalSlot.currentItem = null;
         }
 
-            originalSlot.currentItem = null;
-
-        // find player 
+        // find player
         Transform playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (playerTransform == null)
         {
-            Debug.Log(" player tag missing");
+            Debug.Log("player tag missing");
+            transform.SetParent(originalParent);
+            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            if (originalSlot.currentItem == null)
+            {
+                originalSlot.currentItem = gameObject;
+            }
             return;
         }
 
-        //random drop pos
+        // random drop pos
         Vector2 dropOffset = Random.insideUnitCircle.normalized * Random.Range(minDropDistance, maxDropDistance);
         Vector2 dropPosition = (Vector2)playerTransform.position + dropOffset;
 
-        // isntantiate drop item
-        GameObject dropItem = Instantiate(gameObject, dropPosition, Quaternion.identity);
-        Item droppedItem = dropItem.GetComponent<Item>();
-        droppedItem.quantity = 1;
-        dropItem.GetComponent<BounceEffect>().StartBounce();
+        // instantiate dropped item from the current item like your original code
+        GameObject droppedObject = Instantiate(gameObject, dropPosition, Quaternion.identity);
+        droppedObject.transform.SetParent(null);
 
-        // destroy ui item
+        Item droppedItem = droppedObject.GetComponent<Item>();
+        if (droppedItem != null)
+        {
+            droppedItem.quantity = 1;
+            droppedItem.UpdateQuantityDisplay();
+        }
+
+        // make sure it is a world pickup
+        droppedObject.tag = "Item";
+
+        Collider2D col = droppedObject.GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+
+        SpriteRenderer sr = droppedObject.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.enabled = true;
+        }
+
+        CanvasGroup droppedCanvasGroup = droppedObject.GetComponent<CanvasGroup>();
+        if (droppedCanvasGroup != null)
+        {
+            droppedCanvasGroup.blocksRaycasts = false;
+            droppedCanvasGroup.alpha = 1f;
+        }
+
+        ItemDragHandler droppedDragHandler = droppedObject.GetComponent<ItemDragHandler>();
+        if (droppedDragHandler != null)
+        {
+            droppedDragHandler.enabled = false;
+        }
+
+
+        BounceEffect bounce = droppedObject.GetComponent<BounceEffect>();
+        if (bounce != null)
+        {
+            bounce.StartBounce();
+        }
+
+        // destroy ui item if stack is finished
         if (quantity <= 1 && originalSlot.currentItem == null)
         {
             Destroy(gameObject);
         }
-        
+
         InventoryController.Instance.RebuildItemCounts();
     }
 

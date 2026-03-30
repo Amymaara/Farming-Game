@@ -66,9 +66,9 @@ public class Item : MonoBehaviour
         Debug.Log("You are using an item");
     }
 
-    public virtual void ShowPopUp()
+    public virtual bool ShowPopUp()
     {
-        if (isBeingPickedUp) return;
+        if (isBeingPickedUp) return false;
         isBeingPickedUp = true;
 
         Sprite itemIcon = null;
@@ -101,19 +101,24 @@ public class Item : MonoBehaviour
                     ItemPickupUIController.Instance.ShowItemPickup(Name, itemIcon);
                 }
 
-                gameObject.SetActive(false);
                 Destroy(gameObject);
+                return true;
             }
             else
             {
                 if (col != null) col.enabled = true;
                 isBeingPickedUp = false;
+                return false;
             }
         }
         else
         {
             if (col != null) col.enabled = true;
             isBeingPickedUp = false;
+            return false;
         }
+
     }
+
+
 }

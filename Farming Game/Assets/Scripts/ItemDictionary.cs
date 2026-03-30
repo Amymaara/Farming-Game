@@ -43,5 +43,5 @@ public class ItemDictionary : MonoBehaviour
         }
 
         return prefab;
-    }
+    } 
 }
