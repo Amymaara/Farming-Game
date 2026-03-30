@@ -13,6 +13,8 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
     Transform originalParent;
     CanvasGroup canvasGroup;
+    RectTransform rectTransform;
+    Canvas dragCanvas;
 
     public float minDropDistance = 2f;
     public float maxDropDistance = 3f;
@@ -22,19 +24,36 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        rectTransform = GetComponent<RectTransform>();
         inventoryController = InventoryController.Instance;
+
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        if (inventoryController != null && inventoryController.inventoryPanel != null)
+        {
+            dragCanvas = inventoryController.inventoryPanel.GetComponentInParent<Canvas>();
+        }
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-      originalParent = transform.parent; // Save OG parent
-        transform.SetParent(transform.root); // above other canvas
-        canvasGroup.blocksRaycasts = false; 
-        canvasGroup.alpha = 0.6f; // semi transparent during dragging
+        originalParent = transform.parent; // Save OG parent
+
+        if (dragCanvas != null)
+        {
+            transform.SetParent(dragCanvas.transform);
+            transform.SetAsLastSibling();
+        }
+
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0.6f;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+        rectTransform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
