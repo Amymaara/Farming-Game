@@ -16,6 +16,18 @@ public class CropManager : MonoBehaviour
     }
     public void PlantCrop(Vector3Int cellPos, CropData cropData)
     {
+        if (cropData.growthStageTiles == null || cropData.growthStageTiles.Length == 0)
+        {
+            Debug.LogWarning("Crop has no growth stage tiles.");
+            return;
+        }
+
+        if (cropData.growthStageDurations == null || cropData.growthStageDurations.Length == 0)
+        {
+            Debug.LogWarning("Crop has no growth durations.");
+            return;
+        }
+
         if (cropData == null)
         {
             Debug.LogWarning("No crop data assigned.");
@@ -95,15 +107,19 @@ public class CropManager : MonoBehaviour
         }
     }
 
-   public bool HarvestCrop(Vector3Int cellPos)
+    public bool HarvestCrop(Vector3Int cellPos)
     {
+        Debug.Log("Trying to harvest at: " + cellPos);
+
         if (!plantedCrops.ContainsKey(cellPos))
         {
-            Debug.Log("nothing planted");
+            Debug.Log("Nothing planted here.");
             return false;
         }
 
         PlantedCrop crop = plantedCrops[cellPos];
+
+        Debug.Log("Found crop: " + crop.cropData.cropName + " | stage: " + crop.currentStage);
 
         bool isFullyGrown = crop.currentStage >= crop.cropData.growthStageTiles.Length - 1;
 
@@ -113,12 +129,51 @@ public class CropManager : MonoBehaviour
             return false;
         }
 
+        int harvestAmount = crop.cropData.harvestYield > 0 ? crop.cropData.harvestYield : 1;
+        int harvestItemID = crop.cropData.harvestItemID;
+
+        Debug.Log("Harvest item ID: " + harvestItemID + " | amount: " + harvestAmount);
+
+        if (InventoryController.Instance == null)
+        {
+            Debug.LogWarning("InventoryController.Instance is null");
+            return false;
+        }
+
+        ItemDictionary itemDictionary = FindObjectOfType<ItemDictionary>();
+        if (itemDictionary == null)
+        {
+            Debug.LogWarning("ItemDictionary not found");
+            return false;
+        }
+
+        GameObject itemPrefab = itemDictionary.GetItemPrefab(harvestItemID);
+        if (itemPrefab == null)
+        {
+            Debug.LogWarning("No item prefab found for harvest item ID: " + harvestItemID);
+            return false;
+        }
+
+        Debug.Log("Found prefab: " + itemPrefab.name);
+
+        bool added = InventoryController.Instance.AddItem(itemPrefab, harvestAmount);
+        Debug.Log("AddItem returned: " + added);
+
+        if (!added)
+        {
+            Debug.LogWarning("Harvest failed because item could not be added to inventory.");
+            return false;
+        }
+
         cropTilemap.SetTile(cellPos, null);
         plantedCrops.Remove(cellPos);
 
-        Debug.Log("Harvested " + crop.cropData.cropName + " x" + crop.cropData.harvestYield);
+        if (QuestController.Instance != null)
+        {
+            QuestController.Instance.RegisterCollectedItem(harvestItemID, harvestAmount);
+        }
 
+        Debug.Log("Harvested " + crop.cropData.cropName + " x" + harvestAmount);
         return true;
-    }    
-  
+    }
 }

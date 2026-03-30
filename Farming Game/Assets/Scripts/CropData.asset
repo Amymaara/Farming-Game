@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0de06112dfba274f93b09aa9f41c865, type: 3}
   m_Name: CropData
   m_EditorClassIdentifier: 
-  cropName: Tomato
+  cropName: Pumpkin
   growthStageTiles:
   - {fileID: 11400000, guid: d6c7c395d35436444b387b0908a7cdda, type: 2}
   - {fileID: 11400000, guid: 88350ef73271a2c4fac626ad1735b36e, type: 2}
@@ -22,6 +22,7 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  - 1
+  - 0
   harvestYield: 1
   regrows: 0
+  harvestItemID: 6
