@@ -17131,6 +17131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropTilemap: {fileID: 2028276693}
   farmManager: {fileID: 517293397}
+  waterIconPrefab: {fileID: 6550832278705328530, guid: 1afdacff0d7c6bb468afaa9564735c01, type: 3}
 --- !u!114 &517293401
 MonoBehaviour:
   m_ObjectHideFlags: 0

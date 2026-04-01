@@ -7,71 +7,16 @@ public class CropManager : MonoBehaviour
 {
     public Tilemap cropTilemap;
     public FarmManager farmManager;
+    public GameObject waterIconPrefab;
 
     private Dictionary<Vector3Int, PlantedCrop> plantedCrops = new Dictionary<Vector3Int, PlantedCrop>();
 
     private void Update()
     {
         UpdateGrowth();
+        UpdateWaterIcons();
     }
 
-    public void TryPlantSelectedSeed(Vector3Int cellPos)
-    {
-        Debug.Log("TryPlantSelectedSeed called at: " + cellPos);
-
-        if (SeedSelector.Instance == null)
-        {
-            Debug.LogError("SeedSelectionController.Instance is null");
-            return;
-        }
-
-        SeedData selectedSeed = SeedSelector.Instance.selectedSeed;
-
-        if (selectedSeed == null)
-        {
-            Debug.LogError("Selected seed is NULL");
-            return;
-        }
-
-        Debug.Log("Selected seed is: " + selectedSeed.seedName + " | ID: " + selectedSeed.seedItemID);
-
-        if (selectedSeed.cropToPlant == null)
-        {
-            Debug.LogError("Selected seed has no cropToPlant assigned");
-            return;
-        }
-
-        if (InventoryController.Instance == null)
-        {
-            Debug.LogError("InventoryController.Instance is null");
-            return;
-        }
-
-        Dictionary<int, int> itemCounts = InventoryController.Instance.GetItemCounts();
-        int seedCount = itemCounts.GetValueOrDefault(selectedSeed.seedItemID);
-
-        Debug.Log("Seed count found in inventory: " + seedCount);
-
-        if (seedCount < 1)
-        {
-            Debug.LogError("No seeds left for selected seed");
-            return;
-        }
-
-        bool planted = PlantCrop(cellPos, selectedSeed.cropToPlant);
-        Debug.Log("PlantCrop result: " + planted);
-
-        if (!planted)
-        {
-            Debug.LogWarning("PlantCrop failed, not removing seed");
-            return;
-        }
-
-        InventoryController.Instance.RemoveItemsFromInventory(selectedSeed.seedItemID, 1);
-        InventoryController.Instance.RebuildItemCounts();
-
-        Debug.Log("Successfully planted and removed 1 seed");
-    }
     public bool PlantCrop(Vector3Int cellPos, CropData cropData)
     {
         if (cropData == null)
@@ -99,7 +44,6 @@ public class CropManager : MonoBehaviour
         }
 
         TileBase soilTile = farmManager.farmTilemap.GetTile(cellPos);
-        Debug.Log("Soil tile at target: " + (soilTile != null ? soilTile.name : "NULL"));
 
         if (soilTile != farmManager.tilledTile && soilTile != farmManager.wateredTile)
         {
@@ -119,14 +63,21 @@ public class CropManager : MonoBehaviour
         {
             cropData = cropData,
             currentStage = 0,
-            timer = cropData.growthStageDurations.Length > 0 ? cropData.growthStageDurations[0] : 1f
+            timer = cropData.growthStageDurations[0],
+            waterIcon = null
         };
+
+        if (waterIconPrefab != null)
+        {
+            Vector3 worldPos = cropTilemap.GetCellCenterWorld(cellPos) + new Vector3(0f, 0.6f, 0f);
+            newCrop.waterIcon = Instantiate(waterIconPrefab, worldPos, Quaternion.identity);
+            newCrop.waterIcon.SetActive(true);
+        }
 
         plantedCrops[cellPos] = newCrop;
 
         Debug.Log("Planted " + cropData.cropName);
         return true;
-
     }
 
     private void UpdateGrowth()
@@ -142,7 +93,6 @@ public class CropManager : MonoBehaviour
 
             TileBase soilTile = farmManager.farmTilemap.GetTile(pos);
 
-            // Only grow if watered
             if (soilTile != farmManager.wateredTile)
                 continue;
 
@@ -151,12 +101,8 @@ public class CropManager : MonoBehaviour
             if (crop.timer <= 0f)
             {
                 crop.currentStage++;
-
                 cropTilemap.SetTile(pos, crop.cropData.growthStageTiles[crop.currentStage]);
 
-                Debug.Log(crop.cropData.cropName + " advanced to stage " + crop.currentStage);
-
-                // Remove watered state after one growth stage
                 farmManager.farmTilemap.SetTile(pos, farmManager.tilledTile);
 
                 if (crop.currentStage < crop.cropData.growthStageDurations.Length)
@@ -167,10 +113,28 @@ public class CropManager : MonoBehaviour
         }
     }
 
+    private void UpdateWaterIcons()
+    {
+        foreach (var pair in plantedCrops)
+        {
+            Vector3Int pos = pair.Key;
+            PlantedCrop crop = pair.Value;
+
+            if (crop.waterIcon == null)
+                continue;
+
+            crop.waterIcon.transform.position = cropTilemap.GetCellCenterWorld(pos) + new Vector3(0f, 0.6f, 0f);
+
+            TileBase soilTile = farmManager.farmTilemap.GetTile(pos);
+            bool isWatered = soilTile == farmManager.wateredTile;
+            bool isFullyGrown = crop.currentStage >= crop.cropData.growthStageTiles.Length - 1;
+
+            crop.waterIcon.SetActive(!isWatered && !isFullyGrown);
+        }
+    }
+
     public bool HarvestCrop(Vector3Int cellPos)
     {
-        Debug.Log("Trying to harvest at: " + cellPos);
-
         if (!plantedCrops.ContainsKey(cellPos))
         {
             Debug.Log("Nothing planted here.");
@@ -178,9 +142,6 @@ public class CropManager : MonoBehaviour
         }
 
         PlantedCrop crop = plantedCrops[cellPos];
-
-        Debug.Log("Found crop: " + crop.cropData.cropName + " | stage: " + crop.currentStage);
-
         bool isFullyGrown = crop.currentStage >= crop.cropData.growthStageTiles.Length - 1;
 
         if (!isFullyGrown)
@@ -191,8 +152,6 @@ public class CropManager : MonoBehaviour
 
         int harvestAmount = crop.cropData.harvestYield > 0 ? crop.cropData.harvestYield : 1;
         int harvestItemID = crop.cropData.harvestItemID;
-
-        Debug.Log("Harvest item ID: " + harvestItemID + " | amount: " + harvestAmount);
 
         if (InventoryController.Instance == null)
         {
@@ -214,15 +173,17 @@ public class CropManager : MonoBehaviour
             return false;
         }
 
-        Debug.Log("Found prefab: " + itemPrefab.name);
-
         bool added = InventoryController.Instance.AddItem(itemPrefab, harvestAmount);
-        Debug.Log("AddItem returned: " + added);
 
         if (!added)
         {
             Debug.LogWarning("Harvest failed because item could not be added to inventory.");
             return false;
+        }
+
+        if (crop.waterIcon != null)
+        {
+            Destroy(crop.waterIcon);
         }
 
         cropTilemap.SetTile(cellPos, null);
@@ -233,8 +194,60 @@ public class CropManager : MonoBehaviour
             QuestController.Instance.RegisterCollectedItem(harvestItemID, harvestAmount);
         }
 
-        Debug.Log("Harvested " + crop.cropData.cropName + " x" + harvestAmount);
         return true;
+    }
+
+    public void TryPlantSelectedSeed(Vector3Int cellPos)
+    {
+        Debug.Log("TryPlantSelectedSeed called at: " + cellPos);
+
+        if (SeedSelector.Instance == null)
+        {
+            Debug.LogError("SeedSelector.Instance is null");
+            return;
+        }
+
+        SeedData selectedSeed = SeedSelector.Instance.selectedSeed;
+
+        if (selectedSeed == null)
+        {
+            Debug.LogWarning("No seed selected.");
+            return;
+        }
+
+        if (selectedSeed.cropToPlant == null)
+        {
+            Debug.LogError("Selected seed has no cropToPlant assigned.");
+            return;
+        }
+
+        if (InventoryController.Instance == null)
+        {
+            Debug.LogError("InventoryController.Instance is null");
+            return;
+        }
+
+        Dictionary<int, int> itemCounts = InventoryController.Instance.GetItemCounts();
+        int seedCount = itemCounts.GetValueOrDefault(selectedSeed.seedItemID);
+
+        if (seedCount < 1)
+        {
+            Debug.LogWarning("No seeds left for selected seed.");
+            return;
+        }
+
+        bool planted = PlantCrop(cellPos, selectedSeed.cropToPlant);
+
+        if (!planted)
+        {
+            Debug.LogWarning("Planting failed, seed not removed.");
+            return;
+        }
+
+        InventoryController.Instance.RemoveItemsFromInventory(selectedSeed.seedItemID, 1);
+        InventoryController.Instance.RebuildItemCounts();
+
+        Debug.Log("Successfully planted and removed 1 seed.");
     }
 
 }
