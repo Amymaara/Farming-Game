@@ -20,6 +20,16 @@ public class FarmManager : MonoBehaviour
         if (farmTilemap.GetTile(pos) == null)
         {
             farmTilemap.SetTile(pos, tilledTile);
+
+            if (TutorialProgress.Instance != null && !TutorialProgress.Instance.seedSelectionShown)
+            {
+                TutorialProgress.Instance.seedSelectionShown = true;
+
+                if (TutorialPopupManager.Instance != null)
+                {
+                    TutorialPopupManager.Instance.ShowPopup("Equip the seed bag. Right-click to choose a seed, left-click to plant.");
+                }
+            }
         }
         
     }
@@ -31,6 +41,7 @@ public class FarmManager : MonoBehaviour
         if (farmTilemap.GetTile(pos) == tilledTile)
         {
             farmTilemap.SetTile(pos, wateredTile);
+
         }
 
     }

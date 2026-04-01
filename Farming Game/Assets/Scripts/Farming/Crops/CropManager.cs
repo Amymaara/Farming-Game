@@ -103,6 +103,17 @@ public class CropManager : MonoBehaviour
                 crop.currentStage++;
                 cropTilemap.SetTile(pos, crop.cropData.growthStageTiles[crop.currentStage]);
 
+                bool isNowFullyGrown = crop.currentStage >= crop.cropData.growthStageTiles.Length - 1;
+
+                if (isNowFullyGrown && TutorialProgress.Instance != null && !TutorialProgress.Instance.firstCropHarvested)
+                {
+                    if (TutorialPopupManager.Instance != null)
+                    {
+                        TutorialPopupManager.Instance.ShowPopup("Use the basket to harvest fully grown crops.");
+                        TutorialProgress.Instance.firstCropHarvested = true;
+                    }
+                }
+
                 farmManager.farmTilemap.SetTile(pos, farmManager.tilledTile);
 
                 if (crop.currentStage < crop.cropData.growthStageDurations.Length)
@@ -181,6 +192,7 @@ public class CropManager : MonoBehaviour
             return false;
         }
 
+
         if (crop.waterIcon != null)
         {
             Destroy(crop.waterIcon);
@@ -246,6 +258,12 @@ public class CropManager : MonoBehaviour
 
         InventoryController.Instance.RemoveItemsFromInventory(selectedSeed.seedItemID, 1);
         InventoryController.Instance.RebuildItemCounts();
+
+        if (TutorialProgress.Instance != null && !TutorialProgress.Instance.firstCropWatered)
+        {
+            TutorialProgress.Instance.firstCropWatered = true;
+            TutorialPopupManager.Instance.ShowPopup("Water crops to help them grow.");
+        }
 
         Debug.Log("Successfully planted and removed 1 seed.");
     }

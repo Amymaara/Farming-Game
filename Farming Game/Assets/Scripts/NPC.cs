@@ -195,7 +195,14 @@ public class NPC : MonoBehaviour, IInteractable
         {
             QuestController.Instance.AcceptQuest(dialogueData.quest);
             questState = QuestState.InProgress;
+
+            if (TutorialProgress.Instance != null && !TutorialProgress.Instance.firstTileHoed)
+            {
+                TutorialProgress.Instance.firstTileHoed = true;
+                TutorialPopupManager.Instance.ShowPopup("Use your hoe on soil to till it.");
+            }
         }
+        
         else
         {
             Debug.LogWarning($"{gameObject.name} tried to give a quest, but no quest is assigned.");
