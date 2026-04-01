@@ -47,6 +47,6 @@ MonoBehaviour:
     - '"Yes, let''s get this over with."'
     nextDialogueIndexes: 0700000007000000
     givesQuest: 0101
-  questInProgressIndex: 10
-  questCompletedIndex: 11
+  questInProgressIndex: 11
+  questCompletedIndex: 12
   quest: {fileID: 11400000, guid: 01155bf8c3458e841b450f90a3fe2038, type: 2}
