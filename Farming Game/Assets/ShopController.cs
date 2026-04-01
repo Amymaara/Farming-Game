@@ -86,16 +86,22 @@ public class ShopController : MonoBehaviour
         foreach (Transform child in playerInventoryGrid)
             Destroy(child.gameObject);
 
-        List<InventorySaveData> inventoryItems = InventoryController.Instance.GetInventoryItems();
-        Debug.Log("Inventory items found: " + inventoryItems.Count);
+        List<Slot> inventorySlots = InventoryController.Instance.GetSlots();
+        Debug.Log("Inventory slots found: " + inventorySlots.Count);
 
-        foreach (InventorySaveData data in inventoryItems)
+        foreach (Slot slot in inventorySlots)
         {
-            Debug.Log("Creating player slot for itemID: " + data.itemID + " qty: " + data.quantity);
-            CreateShopSlot(playerInventoryGrid, data.itemID, data.quantity, false);
+            if (slot == null || slot.currentItem == null) continue;
+
+            Item item = slot.currentItem.GetComponent<Item>();
+            if (item == null) continue;
+
+            Debug.Log("Creating player slot for itemID: " + item.ID + " qty: " + item.quantity);
+            CreateShopSlot(playerInventoryGrid, item.ID, item.quantity, false, slot);
         }
 
         Debug.Log("Player inventory grid child count AFTER build: " + playerInventoryGrid.childCount);
+
     }
 
     private void CreateShopSlot(Transform grid, int itemID, int quantity, bool isShop, Slot originalSlot = null)
@@ -171,5 +177,27 @@ public class ShopController : MonoBehaviour
 
         slot.isShopSlot = isShop;
         slot.SetItem(itemInstance, price);
+
+        ItemDragHandler dragHandler = itemInstance.GetComponent<ItemDragHandler>();
+        if (dragHandler) dragHandler.enabled = false;
+
+        ShopItemHandler handler = itemInstance.AddComponent<ShopItemHandler>();
+        handler.Initiliase(isShop);
+        if (!isShop) handler.originalInventorySlot = originalSlot;
+    }
+
+    public void AddItemToShop(int itemID, int quantity)
+    {
+        if (!currentShop) return;
+        currentShop.AddToStock(itemID, quantity);
+        RefreshShopDisplay();
+    }
+
+    public bool RemoveItemFromShop(int itemID, int quantity)
+    {
+        if (!currentShop) return false;
+        bool success = currentShop.RemoveFromShopStock(itemID, quantity);
+        if (success) RefreshShopDisplay();
+        return success;
     }
 }

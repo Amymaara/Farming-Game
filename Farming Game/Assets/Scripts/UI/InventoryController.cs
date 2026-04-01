@@ -14,6 +14,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+
     private ItemDictionary itemDictionary;
 
     public GameObject inventoryPanel;
@@ -38,6 +39,11 @@ public class InventoryController : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    public List<Slot> GetSlots()
+    {
+        return slots;
     }
 
     public void RebuildItemCounts()
