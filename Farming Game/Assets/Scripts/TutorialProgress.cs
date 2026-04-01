@@ -10,6 +10,7 @@ public class TutorialProgress : MonoBehaviour
     public bool firstCropPlanted;
     public bool firstCropWatered;
     public bool firstCropHarvested;
+    public bool showedToolScroll;
 
     private void Awake()
     {

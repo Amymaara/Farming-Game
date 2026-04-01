@@ -20,6 +20,7 @@ public class FarmManager : MonoBehaviour
         if (farmTilemap.GetTile(pos) == null)
         {
             farmTilemap.SetTile(pos, tilledTile);
+            SoundManager.PlaySoundForDuration(SoundType.HOE, 0.5f);
 
             if (TutorialProgress.Instance != null && !TutorialProgress.Instance.seedSelectionShown)
             {
@@ -41,6 +42,7 @@ public class FarmManager : MonoBehaviour
         if (farmTilemap.GetTile(pos) == tilledTile)
         {
             farmTilemap.SetTile(pos, wateredTile);
+            SoundManager.PlaySoundForDuration(SoundType.WATERING, 0.5f);
 
         }
 
@@ -53,5 +55,6 @@ public class FarmManager : MonoBehaviour
 
         return isInFarmableArea || isAlreadyFarmTile;
     }
+
 
 }

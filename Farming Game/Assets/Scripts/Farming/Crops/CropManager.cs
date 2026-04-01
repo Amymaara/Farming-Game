@@ -192,6 +192,8 @@ public class CropManager : MonoBehaviour
             return false;
         }
 
+        SoundManager.PlaySound(SoundType.HARVESTING);
+
 
         if (crop.waterIcon != null)
         {
@@ -258,6 +260,7 @@ public class CropManager : MonoBehaviour
 
         InventoryController.Instance.RemoveItemsFromInventory(selectedSeed.seedItemID, 1);
         InventoryController.Instance.RebuildItemCounts();
+        SoundManager.PlaySound(SoundType.PLANTING);
 
         if (TutorialProgress.Instance != null && !TutorialProgress.Instance.firstCropWatered)
         {

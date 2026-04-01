@@ -85,6 +85,7 @@ public class ShopItemHandler : MonoBehaviour, IPointerClickHandler
 
         if (added)
         {
+            SoundManager.PlaySound(SoundType.SHOPBUY);
             CurrencyController.Instance.SpendGold(slot.itemPrice);
             ShopController.Instance.RefreshInventoryDisplay();
             bool removed = ShopController.Instance.RemoveItemFromShop(item.ID, 1);
@@ -109,6 +110,7 @@ public class ShopItemHandler : MonoBehaviour, IPointerClickHandler
 
         if (invItem.quantity > 1)
         {
+            SoundManager.PlaySound(SoundType.SHOPSELL);
             invItem.RemoveFromStack(1);
         }
         else

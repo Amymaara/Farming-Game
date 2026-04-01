@@ -72,6 +72,7 @@ public class ToolSelector : MonoBehaviour
     {
         currentTool = newTool;
         UpdateToolUI();
+        SoundManager.PlaySound(SoundType.TOOLSWITCH);
         Debug.Log("Selected tool is: + currentTool");
     }
 

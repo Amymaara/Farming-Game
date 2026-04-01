@@ -44,6 +44,7 @@ public class Chest : MonoBehaviour, IInteractable
     private void OpenChest()
     {
         SetOpened(true);
+        SoundManager.PlaySound(SoundType.CHEST);
 
         if (itemPrefab)
         {

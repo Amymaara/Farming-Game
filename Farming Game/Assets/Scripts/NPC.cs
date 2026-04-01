@@ -261,6 +261,7 @@ public class NPC : MonoBehaviour, IInteractable
 
         QuestController.Instance.HandInQuest(quest.questID);
         RewardsController.Instance.GiveQuestReward(quest);
+        SoundManager.PlaySound(SoundType.QUESTCOMPLETE);
 
         CampGuyProgression progression = FindObjectOfType<CampGuyProgression>();
         if (progression != null)
