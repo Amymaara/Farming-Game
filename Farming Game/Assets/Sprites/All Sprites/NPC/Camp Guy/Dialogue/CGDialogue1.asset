@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f48d2a9ef545b4584ce29e5ebbbe7a, type: 3}
   m_Name: CGDialogue1
   m_EditorClassIdentifier: 
-  npcName: 
-  npcPortrait: {fileID: 0}
+  npcName: Camp Guy
+  npcPortrait: {fileID: 5754670671140466535, guid: 1b8135b0080cf61468de419c21eb4d29, type: 3}
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
