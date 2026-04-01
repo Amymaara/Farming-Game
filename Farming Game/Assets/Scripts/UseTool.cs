@@ -9,6 +9,12 @@ public class UseTool : MonoBehaviour
     public FarmManager farmManager;
     public CropManager cropManager;
     public SeedBagUI seedBagUI;
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -46,10 +52,12 @@ public class UseTool : MonoBehaviour
             case ToolType.Hoe:
                 Debug.Log("Hoe used");
                 farmManager.HoeTile(targetTile);
+                animator.SetTrigger("useHoe");
                 break;
 
             case ToolType.WateringCan:
                 farmManager.WaterTile(targetTile);
+                animator.SetTrigger("useWater");
                 break;
 
             case ToolType.Seed:
