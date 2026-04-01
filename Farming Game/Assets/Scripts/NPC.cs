@@ -93,7 +93,11 @@ public class NPC : MonoBehaviour, IInteractable
 
     private void SyncQuestState()
     {
-        if (dialogueData.quest == null) return;
+        if (dialogueData == null || dialogueData.quest == null)
+        {
+            questState = QuestState.NotStarted;
+            return;
+        }
 
         string questID = dialogueData.quest.questID;
 
@@ -101,13 +105,10 @@ public class NPC : MonoBehaviour, IInteractable
         {
             questState = QuestState.Completed;
         }
-
-
         else if (QuestController.Instance.IsQuestActive(questID))
         {
             questState = QuestState.InProgress;
         }
-
         else
         {
             questState = QuestState.NotStarted;
