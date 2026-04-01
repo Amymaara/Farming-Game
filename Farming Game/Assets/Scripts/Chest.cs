@@ -14,6 +14,7 @@ public class Chest : MonoBehaviour, IInteractable
     public bool IsOpened { get; private set; }
     public string ChestID { get; private set; }
     public GameObject itemPrefab;
+    public int quantity = 1;
     public Sprite openedSprite;
     
     void Start()
@@ -42,19 +43,23 @@ public class Chest : MonoBehaviour, IInteractable
 
     private void OpenChest()
     {
-        // set opened 
         SetOpened(true);
 
-        // drop item
         if (itemPrefab)
         {
-            GameObject droppedItem = Instantiate(itemPrefab,transform.position + Vector3.down, Quaternion.identity);
+            GameObject droppedItem = Instantiate(itemPrefab, transform.position + Vector3.down, Quaternion.identity);
+
+            Item item = droppedItem.GetComponent<Item>();
+            if (item != null)
+            {
+                item.quantity = quantity;
+            }
+
             BounceEffect bounce = droppedItem.GetComponent<BounceEffect>();
             if (bounce != null)
             {
                 bounce.StartBounce();
             }
-
         }
     }
 

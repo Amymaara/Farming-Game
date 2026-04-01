@@ -11,10 +11,21 @@ public class CampGuyProgression : MonoBehaviour
     [Header("References")]
     public NPC npc;
 
+    [Header("Quest Unlocks")]
+    public GameObject chestAfterQuest1;
+    public GameObject npcAfterQuest2;
+
     private bool finished = false;
 
     void Start()
     {
+        // optional: force these off at start
+        if (chestAfterQuest1 != null)
+            chestAfterQuest1.SetActive(false);
+
+        if (npcAfterQuest2 != null)
+            npcAfterQuest2.SetActive(false);
+
         UpdateDialogueStage();
     }
 
@@ -33,6 +44,17 @@ public class CampGuyProgression : MonoBehaviour
         Debug.Log("Q1 handed in: " + q1Done);
         Debug.Log("Q2 handed in: " + q2Done);
         Debug.Log("Q3 handed in: " + q3Done);
+
+        // hard-coded unlocks
+        if (q1Done && chestAfterQuest1 != null)
+        {
+            chestAfterQuest1.SetActive(true);
+        }
+
+        if (q2Done && npcAfterQuest2 != null)
+        {
+            npcAfterQuest2.SetActive(true);
+        }
 
         if (!q1Done)
         {
@@ -54,15 +76,13 @@ public class CampGuyProgression : MonoBehaviour
             if (endDialogue != null)
                 npc.dialogueData = endDialogue;
 
-            Debug.Log("Camp Guy Finished");
-        }
+            Debug.Log("Camp Guy  Finished");
 
-        if (npc.dialogueData != null && npc.dialogueData.quest != null)
-        {
-            Debug.Log("Camp Guy current quest ID is now: " + npc.dialogueData.quest.questID);
+            if (!finished)
+            {
+                finished = true;
+            }
         }
     }
-
-   
 
 }
