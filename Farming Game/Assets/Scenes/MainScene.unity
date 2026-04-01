@@ -16933,6 +16933,10 @@ MonoBehaviour:
   defaultShopStock:
   - itemID: 9
     quantity: 5
+  - itemID: 10
+    quantity: 2
+  - itemID: 11
+    quantity: 3
 --- !u!224 &508565444 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6459305561553813525, guid: 2b4c2766f3a4aaa469a3ab3e63af1d83, type: 3}

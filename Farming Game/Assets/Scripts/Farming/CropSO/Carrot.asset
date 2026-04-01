@@ -19,10 +19,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 864d4643cbc57d742b89b5a75e0aea78, type: 2}
   - {fileID: 11400000, guid: c036d8fbd552984439f9db1a0876b789, type: 2}
   growthStageDurations:
-  - 1
-  - 1
-  - 1
+  - 4
+  - 6
+  - 7
   - 0
-  harvestYield: 1
+  harvestYield: 2
   regrows: 0
   harvestItemID: 8
