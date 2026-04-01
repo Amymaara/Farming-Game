@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef12394b198d426428cd6d44d830e9d0, type: 3}
   m_Name: CampGuy1
   m_EditorClassIdentifier: 
-  questID: Bring Camp Guy Tomatoes6fbe7505-ab11-4d42-81b4-12b24539999d
+  questID: 6fbe7505-ab11-4d42-81b4-12b24539999d
   questName: Bring Camp Guy Tomatoes
   description: Camp Guy needs some tomatoes for his soup
   objectives:
   - objectiveID: 6
-    description: Camp Guy needs some tomatoes for his soup.
+    description: Bring Camp Guy 3 Tomatoes
     type: 0
     requiredAmount: 3
     currentAmount: 0
   questRewards:
   - type: 0
-    RewardID: 6
+    RewardID: 3
     amount: 5

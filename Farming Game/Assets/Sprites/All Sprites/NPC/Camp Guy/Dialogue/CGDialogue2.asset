@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f48d2a9ef545b4584ce29e5ebbbe7a, type: 3}
+  m_Name: CGDialogue2
+  m_EditorClassIdentifier: 
+  npcName: 
+  npcPortrait: {fileID: 0}
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  dialogueLines:
+  - '"Well well, I thought you''d mess it up."'
+  - '"Turns out it was pretty decent."'
+  - '"But decent doesn''t fix a bridge."'
+  - '"What I need is a proper meal."'
+  - '"Something with more substance, something hearty."'
+  - '"Oh yes, I know."'
+  - '"It needs different kind of vegetables."'
+  - '"Bring me some potatoes for this."'
+  - '"There should be some potato seeds in that beat up shed next to the farm."'
+  - '"How''s the potatoes going?"'
+  - '"Ah yes much better. but..."'
+  autoProgressLines: 
+  endDialogueLines: 
+  autoProgressDelay: 1.5
+  choices:
+  - dialogueIndex: 2
+    choices:
+    - '"So you''re not gonna fix it?"'
+    - '"What? I did everything you asked for."'
+    nextDialogueIndexes: 0300000003000000
+    givesQuest: 0000
+  - dialogueIndex: 8
+    choices:
+    - '"Alright, but you better fix it this time."'
+    - '"Fine."'
+    nextDialogueIndexes: 0800000008000000
+    givesQuest: 0101
+  questInProgressIndex: 9
+  questCompletedIndex: 10
+  quest: {fileID: 11400000, guid: 3a41f83e10944f14facd208f8d142741, type: 2}
