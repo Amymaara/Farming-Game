@@ -14,6 +14,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+<<<<<<< HEAD
     /*  private ItemDictionary itemDictionary;
 
       public GameObject inventoryPanel;
@@ -237,6 +238,8 @@ public class InventoryController : MonoBehaviour
 
           RebuildItemCounts();
       } */
+=======
+>>>>>>> Farming-Mechanics
 
     private ItemDictionary itemDictionary;
 
@@ -263,6 +266,11 @@ public class InventoryController : MonoBehaviour
         itemDictionary = FindObjectOfType<ItemDictionary>();
         CreateSlots();
         RebuildItemCounts();
+    }
+
+    public List<Slot> GetSlots()
+    {
+        return slots;
     }
 
     public void RebuildItemCounts()

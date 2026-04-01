@@ -29,8 +29,13 @@ PrefabInstance:
       value: Acorn
       objectReference: {fileID: 0}
     - target: {fileID: 6679622407529984887, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
+<<<<<<< HEAD
       propertyPath: quantity
       value: 1
+=======
+      propertyPath: buyPrice
+      value: 10
+>>>>>>> Farming-Mechanics
       objectReference: {fileID: 0}
     - target: {fileID: 7039965509554745236, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: m_Pivot.x
