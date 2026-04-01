@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef12394b198d426428cd6d44d830e9d0, type: 3}
   m_Name: CampGuy2
   m_EditorClassIdentifier: 
-  questID: 15831706-151e-416b-b3e3-50cdfc105e14
+  questID: Bring Camp Guy Pumpkins
   questName: Bring Camp Guy Pumpkins
   description: Camp guy wants some pumpkins
   objectives:

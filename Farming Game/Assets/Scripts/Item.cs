@@ -22,10 +22,19 @@ public class Item : MonoBehaviour
     private TMP_Text quantityText;
     private bool isBeingPickedUp = false;
 
+    public int buyPrice = 10;
+    [Range(0,1)]
+    public float sellPriceMultiplier = 0.5f;
+
     private void Awake()
     {
         quantityText = GetComponentInChildren<TMP_Text>(true);
         UpdateQuantityDisplay();
+    }
+
+    public int GetSellPrice()
+    {
+        return Mathf.RoundToInt(buyPrice * sellPriceMultiplier);
     }
 
     public void AddToStack(int amount = 1)
