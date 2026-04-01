@@ -21,8 +21,8 @@ MonoBehaviour:
   - '"This will take a bit of time."'
   - '"But don''t worry."'
   - '"She''ll be even sturdier when i''m done with her."'
-  autoProgressLines: 
-  endDialogueLines: 
+  autoProgressLines: 010100
+  endDialogueLines: 000001
   autoProgressDelay: 1.5
   choices: []
   questInProgressIndex: 0

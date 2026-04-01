@@ -31,8 +31,8 @@ MonoBehaviour:
   - '"The trader should be at the bridge by now."'
   - '"Did you get the seeds?"'
   - '"A promise is a promise, let''s get working."'
-  autoProgressLines: 
-  endDialogueLines: 
+  autoProgressLines: 00000000000000000000000000
+  endDialogueLines: 00000000000000000001010101
   autoProgressDelay: 1.5
   choices:
   - dialogueIndex: 2

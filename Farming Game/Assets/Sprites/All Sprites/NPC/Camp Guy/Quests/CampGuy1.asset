@@ -16,7 +16,7 @@ MonoBehaviour:
   questName: Bring Camp Guy Tomatoes
   description: Camp Guy needs some tomatoes for his soup
   objectives:
-  - objectiveID: 6
+  - objectiveID: 7
     description: Bring Camp Guy 3 Tomatoes
     type: 0
     requiredAmount: 3

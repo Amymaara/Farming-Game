@@ -248,11 +248,21 @@ public class NPC : MonoBehaviour, IInteractable
 
     void HandleQuestCompletion(Quests quest)
     {
-        // give reward
         if (QuestController.Instance.IsQuestHandedIn(quest.questID))
             return;
 
         QuestController.Instance.HandInQuest(quest.questID);
         RewardsController.Instance.GiveQuestReward(quest);
+
+        CampGuyProgression progression = FindObjectOfType<CampGuyProgression>();
+        if (progression != null)
+        {
+            progression.UpdateDialogueStage();
+            Debug.Log("Camp Guy progression updated after hand-in");
+        }
+        else
+        {
+            Debug.LogWarning("CampGuyProgression not found in scene");
+        }
     }
 }

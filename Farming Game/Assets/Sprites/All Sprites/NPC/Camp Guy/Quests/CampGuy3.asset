@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CampGuy3
   m_EditorClassIdentifier: 
   questID: Bddfa4eb2-1a69-4fc8-9592-eb3cabb93b01
-  questName: Bring Camp Guy 3 Beans
-  description: Bring Camp guy beans
+  questName: Bring Camp Guy 3 Carrots
+  description: bring camp guy 3 carrots
   objectives:
-  - objectiveID: 6
-    description: Bring Cmap Guy 3 Beans
+  - objectiveID: 8
+    description: Bring Cmap Guy 3 Carrots
     type: 0
     requiredAmount: 3
     currentAmount: 0

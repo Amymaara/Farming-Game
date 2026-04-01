@@ -25,12 +25,12 @@ MonoBehaviour:
   - '"Something with more substance, something hearty."'
   - '"Oh yes, I know."'
   - '"It needs different kind of vegetables."'
-  - '"Bring me some potatoes for this."'
-  - '"There should be some potato seeds in that beat up shed next to the farm."'
-  - '"How''s the potatoes going?"'
+  - '"Bring me some pumpkin for this."'
+  - '"There should be some pumpkin seeds in that beat up shed next to the farm."'
+  - '"How''s the pumpkins going?"'
   - '"Ah yes much better. but..."'
-  autoProgressLines: 
-  endDialogueLines: 
+  autoProgressLines: 0000000000000000000000
+  endDialogueLines: 0000000000000000010101
   autoProgressDelay: 1.5
   choices:
   - dialogueIndex: 2
@@ -39,7 +39,7 @@ MonoBehaviour:
     - '"What? I did everything you asked for."'
     nextDialogueIndexes: 0300000003000000
     givesQuest: 0000
-  - dialogueIndex: 8
+  - dialogueIndex: 7
     choices:
     - '"Alright, but you better fix it this time."'
     - '"Fine."'

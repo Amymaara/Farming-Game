@@ -20,23 +20,7 @@ public class CampGuyProgression : MonoBehaviour
 
     public void UpdateDialogueStage()
     {
-        if (npc == null)
-        {
-            Debug.LogError("NPC reference missing");
-            return;
-        }
-
-        if (dialogue1 == null || dialogue2 == null || dialogue3 == null)
-        {
-            Debug.LogError("One or more Camp Guy dialogue stages are missing");
-            return;
-        }
-
-        if (dialogue1.quest == null || dialogue2.quest == null || dialogue3.quest == null)
-        {
-            Debug.LogError("One or more dialogue assets are missing their quest reference");
-            return;
-        }
+        Debug.Log("UpdateDialogueStage called");
 
         string quest1ID = dialogue1.quest.questID;
         string quest2ID = dialogue2.quest.questID;
@@ -46,45 +30,39 @@ public class CampGuyProgression : MonoBehaviour
         bool q2Done = QuestController.Instance.IsQuestHandedIn(quest2ID);
         bool q3Done = QuestController.Instance.IsQuestHandedIn(quest3ID);
 
+        Debug.Log("Q1 handed in: " + q1Done);
+        Debug.Log("Q2 handed in: " + q2Done);
+        Debug.Log("Q3 handed in: " + q3Done);
+
         if (!q1Done)
         {
             npc.dialogueData = dialogue1;
-            Debug.Log("Camp Guy - Stage 1");
+            Debug.Log("Camp Guy  Stage 1");
         }
         else if (!q2Done)
         {
             npc.dialogueData = dialogue2;
-            Debug.Log("Camp Guy - Stage 2");
+            Debug.Log("Camp Guy  Stage 2");
         }
         else if (!q3Done)
         {
             npc.dialogueData = dialogue3;
-            Debug.Log("Camp Guy - Stage 3");
+            Debug.Log("Camp Guy  Stage 3");
         }
         else
         {
             if (endDialogue != null)
                 npc.dialogueData = endDialogue;
 
-            Debug.Log("Camp Guy - Finished");
-
-            if (!finished)
-            {
-                finished = true;
-                PlayRepairMoment();
-            }
+            Debug.Log("Camp Guy Finished");
         }
-    }
 
-    private void PlayRepairMoment()
-    {
-        Debug.Log("Camp Guy starts repairing the bridge.");
-
-        Animator animator = npc.GetComponent<Animator>();
-        if (animator != null)
+        if (npc.dialogueData != null && npc.dialogueData.quest != null)
         {
-            animator.SetTrigger("Repair");
+            Debug.Log("Camp Guy current quest ID is now: " + npc.dialogueData.quest.questID);
         }
     }
+
+   
 
 }
