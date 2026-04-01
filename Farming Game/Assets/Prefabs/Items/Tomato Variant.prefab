@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8748407838983220558
+--- !u!1001 &7179370855811105553
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,22 +11,22 @@ PrefabInstance:
     - target: {fileID: -8434602477528994492, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 268089996, guid: 177b837e17c2d3d4d9ba2c5b83c2fcb9, type: 3}
+      objectReference: {fileID: 64055009, guid: cae23ee9118801d41bc3d3458a4b7acb, type: 3}
     - target: {fileID: 2940048127216833331, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 268089996, guid: 177b837e17c2d3d4d9ba2c5b83c2fcb9, type: 3}
+      objectReference: {fileID: 64055009, guid: cae23ee9118801d41bc3d3458a4b7acb, type: 3}
     - target: {fileID: 4156163632721971579, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: m_Name
-      value: Pumpkin Variant
+      value: Tomato Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6679622407529984887, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: ID
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6679622407529984887, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: Name
-      value: Pumpkin
+      value: 'Tomato '
       objectReference: {fileID: 0}
     - target: {fileID: 6679622407529984887, guid: f66bd1c0fd84782409698e2ef16a92ec, type: 3}
       propertyPath: quantity

@@ -10,23 +10,47 @@ public class SeedBagUI : MonoBehaviour
 
     public void Open()
     {
-        if (panel == null) return;
+        Debug.Log("SeedBagUI Open called");
+
+        if (panel == null)
+        {
+            Debug.LogError("SeedBagUI panel is null");
+            return;
+        }
+
         panel.SetActive(true);
         RefreshSeedList();
     }
 
     public void Close()
     {
-        if (panel == null) return;
+        Debug.Log("SeedBagUI Close called");
+
+        if (panel == null)
+        {
+            Debug.LogError("SeedBagUI panel is null");
+            return;
+        }
+
         panel.SetActive(false);
     }
 
     public void Toggle()
     {
-        if (panel == null) return;
+        Debug.Log("SeedBagUI Toggle called");
 
-        if (panel.activeSelf) Close();
-        else Open();
+        if (panel == null)
+        {
+            Debug.LogError("SeedBagUI panel is null");
+            return;
+        }
+
+        Debug.Log("Panel active before toggle: " + panel.activeSelf);
+
+        if (panel.activeSelf)
+            Close();
+        else
+            Open();
     }
 
     public void RefreshSeedList()
@@ -45,6 +69,8 @@ public class SeedBagUI : MonoBehaviour
             if (seed == null) continue;
 
             int amount = itemCounts.GetValueOrDefault(seed.seedItemID);
+            Debug.Log("Checking seed " + seed.seedName + " with ID " + seed.seedItemID + " count " + amount);
+
             if (amount <= 0) continue;
 
             GameObject buttonObj = Instantiate(seedButtonPrefab, buttonParent);
@@ -59,6 +85,8 @@ public class SeedBagUI : MonoBehaviour
 
     public void SelectSeed(SeedData seed)
     {
+        Debug.Log("SeedBagUI.SelectSeed called with: " + seed.seedName);
+
         if (SeedSelector.Instance != null)
         {
             SeedSelector.Instance.SelectSeed(seed);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class UseTool : MonoBehaviour
 {
@@ -13,7 +14,13 @@ public class UseTool : MonoBehaviour
     {
         if (Mouse.current == null) return;
 
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        // Do not use tools when clicking on UI
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             PerformUseTool();
         }
@@ -46,7 +53,7 @@ public class UseTool : MonoBehaviour
                 break;
 
             case ToolType.Seed:
-                Debug.Log("Seed planted");
+                Debug.Log("Seed tool used on tile: " + targetTile);
                 cropManager.TryPlantSelectedSeed(targetTile);
                 break;
 

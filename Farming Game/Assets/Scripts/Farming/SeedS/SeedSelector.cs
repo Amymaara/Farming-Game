@@ -12,12 +12,10 @@ public class SeedSelector : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void SelectSeed(SeedData newSeed)
+    public void SelectSeed(SeedData seed)
     {
-        if (newSeed == null) return;
-
-        selectedSeed = newSeed;
-        Debug.Log("Selected seed: " + newSeed.seedName);
+        selectedSeed = seed;
+        Debug.Log("Selected seed set to: " + (seed != null ? seed.seedName : "None"));
     }
 
     public void ClearSeed()

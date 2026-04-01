@@ -17,9 +17,11 @@ public class CropManager : MonoBehaviour
 
     public void TryPlantSelectedSeed(Vector3Int cellPos)
     {
+        Debug.Log("TryPlantSelectedSeed called at: " + cellPos);
+
         if (SeedSelector.Instance == null)
         {
-            Debug.LogWarning("No SeedSelectionController found.");
+            Debug.LogError("SeedSelectionController.Instance is null");
             return;
         }
 
@@ -27,76 +29,88 @@ public class CropManager : MonoBehaviour
 
         if (selectedSeed == null)
         {
-            Debug.Log("No seed selected.");
+            Debug.LogError("Selected seed is NULL");
             return;
         }
 
+        Debug.Log("Selected seed is: " + selectedSeed.seedName + " | ID: " + selectedSeed.seedItemID);
+
         if (selectedSeed.cropToPlant == null)
         {
-            Debug.LogWarning("Selected seed has no crop assigned.");
+            Debug.LogError("Selected seed has no cropToPlant assigned");
             return;
         }
 
         if (InventoryController.Instance == null)
         {
-            Debug.LogWarning("InventoryController.Instance is null");
+            Debug.LogError("InventoryController.Instance is null");
             return;
         }
 
         Dictionary<int, int> itemCounts = InventoryController.Instance.GetItemCounts();
-        if (itemCounts.GetValueOrDefault(selectedSeed.seedItemID) < 1)
+        int seedCount = itemCounts.GetValueOrDefault(selectedSeed.seedItemID);
+
+        Debug.Log("Seed count found in inventory: " + seedCount);
+
+        if (seedCount < 1)
         {
-            Debug.Log("No seeds left for: " + selectedSeed.seedName);
+            Debug.LogError("No seeds left for selected seed");
             return;
         }
 
-        // plant using your existing method
-        PlantCrop(cellPos, selectedSeed.cropToPlant);
+        bool planted = PlantCrop(cellPos, selectedSeed.cropToPlant);
+        Debug.Log("PlantCrop result: " + planted);
 
-        // remove one seed after planting
+        if (!planted)
+        {
+            Debug.LogWarning("PlantCrop failed, not removing seed");
+            return;
+        }
+
         InventoryController.Instance.RemoveItemsFromInventory(selectedSeed.seedItemID, 1);
         InventoryController.Instance.RebuildItemCounts();
 
-        Debug.Log("Planted using selected seed: " + selectedSeed.seedName);
+        Debug.Log("Successfully planted and removed 1 seed");
     }
-    public void PlantCrop(Vector3Int cellPos, CropData cropData)
+    public bool PlantCrop(Vector3Int cellPos, CropData cropData)
     {
+        if (cropData == null)
+        {
+            Debug.LogWarning("No crop data assigned.");
+            return false;
+        }
+
         if (cropData.growthStageTiles == null || cropData.growthStageTiles.Length == 0)
         {
             Debug.LogWarning("Crop has no growth stage tiles.");
-            return;
+            return false;
         }
 
         if (cropData.growthStageDurations == null || cropData.growthStageDurations.Length == 0)
         {
             Debug.LogWarning("Crop has no growth durations.");
-            return;
-        }
-
-        if (cropData == null)
-        {
-            Debug.LogWarning("No crop data assigned.");
-            return;
+            return false;
         }
 
         if (!farmManager.IsFarmable(cellPos))
         {
-            Debug.Log("Not a farmable tile.");
-            return;
+            Debug.LogWarning("Not a farmable tile.");
+            return false;
         }
 
         TileBase soilTile = farmManager.farmTilemap.GetTile(cellPos);
+        Debug.Log("Soil tile at target: " + (soilTile != null ? soilTile.name : "NULL"));
 
         if (soilTile != farmManager.tilledTile && soilTile != farmManager.wateredTile)
         {
-            Debug.Log("Tile must be tilled or watered before planting.");
-            return;
+            Debug.LogWarning("Tile must be tilled or watered before planting.");
+            return false;
         }
 
         if (cropTilemap.GetTile(cellPos) != null)
         {
-            Debug.Log("Crop already planted here.");
-            return;
+            Debug.LogWarning("Crop already planted here.");
+            return false;
         }
 
         cropTilemap.SetTile(cellPos, cropData.growthStageTiles[0]);
@@ -105,12 +119,13 @@ public class CropManager : MonoBehaviour
         {
             cropData = cropData,
             currentStage = 0,
-            timer = cropData.growthStageDurations[0]
+            timer = cropData.growthStageDurations.Length > 0 ? cropData.growthStageDurations[0] : 1f
         };
 
         plantedCrops[cellPos] = newCrop;
 
         Debug.Log("Planted " + cropData.cropName);
+        return true;
 
     }
 
