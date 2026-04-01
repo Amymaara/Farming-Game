@@ -7,13 +7,20 @@ public class UseTool : MonoBehaviour
     public HighlightTile highlightTile;
     public FarmManager farmManager;
     public CropManager cropManager;
-    public CropData selectedCrop;
+    public SeedBagUI seedBagUI;
 
     private void Update()
     {
+        if (Mouse.current == null) return;
+
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             PerformUseTool();
+        }
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            PerformRightClickAction();
         }
     }
 
@@ -40,7 +47,7 @@ public class UseTool : MonoBehaviour
 
             case ToolType.Seed:
                 Debug.Log("Seed planted");
-                cropManager.PlantCrop(targetTile, selectedCrop);
+                cropManager.TryPlantSelectedSeed(targetTile);
                 break;
 
             case ToolType.Basket:
@@ -51,6 +58,22 @@ public class UseTool : MonoBehaviour
                 Debug.Log("Sword used");
                 break;
 
+        }
+    }
+
+    private void PerformRightClickAction()
+    {
+        if (toolSelector == null) return;
+
+        switch (toolSelector.currentTool)
+        {
+            case ToolType.Seed:
+                Debug.Log("Opening seed bag");
+                if (seedBagUI != null)
+                {
+                    seedBagUI.Toggle();
+                }
+                break;
         }
     }
 

@@ -565,7 +565,7 @@ MonoBehaviour:
   highlightTile: {fileID: 517293398}
   farmManager: {fileID: 517293397}
   cropManager: {fileID: 517293400}
-  selectedCrop: {fileID: 11400000, guid: 4ae57ad40b2777742ab60b5272d77bd9, type: 2}
+  seedBagUI: {fileID: 0}
 --- !u!1 &110387625
 GameObject:
   m_ObjectHideFlags: 0
