@@ -39,6 +39,11 @@ public class ShopController : MonoBehaviour
 
     public void OpenShop(ShopNPC shop)
     {
+        if (TutorialProgress.Instance != null && !TutorialProgress.Instance.firstShopOpen)
+        {
+            TutorialProgress.Instance.firstShopOpen = true;
+            TutorialPopupManager.Instance.ShowPopup("Right click to buy and sell");
+        }
         currentShop = shop;
         shopPanel.SetActive(true);
         if (shopTitleText != null) shopTitleText.text = shop.shopKeeperName + "'s Shop";

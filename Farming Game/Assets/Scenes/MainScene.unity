@@ -17201,6 +17201,8 @@ MonoBehaviour:
   firstCropWatered: 0
   firstCropHarvested: 0
   showedToolScroll: 0
+  firstNPCInteract: 0
+  firstShopOpen: 0
 --- !u!114 &517293405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17322,7 +17324,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1208463130}
   - {fileID: 809621473}
   - {fileID: 214285280}
   - {fileID: 1495849275}
@@ -17330,6 +17331,7 @@ RectTransform:
   - {fileID: 846486465}
   - {fileID: 1937269159}
   - {fileID: 610871489}
+  - {fileID: 1208463130}
   m_Father: {fileID: 1960763247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -22263,7 +22265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1208463130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22281,7 +22283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 19, y: 425}
   m_SizeDelta: {x: -1000, y: -900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1208463131

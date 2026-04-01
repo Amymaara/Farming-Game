@@ -11,6 +11,8 @@ public class TutorialProgress : MonoBehaviour
     public bool firstCropWatered;
     public bool firstCropHarvested;
     public bool showedToolScroll;
+    public bool firstNPCInteract;
+    public bool firstShopOpen;
 
     private void Awake()
     {

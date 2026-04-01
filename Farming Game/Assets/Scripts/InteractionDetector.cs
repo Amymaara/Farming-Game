@@ -41,6 +41,11 @@ public class InteractionDetector : MonoBehaviour
         {
             interactableInRange = interactable;
             interactionIcon.SetActive(true);
+            if (TutorialProgress.Instance != null && !TutorialProgress.Instance.firstNPCInteract)
+            {
+                TutorialProgress.Instance.firstNPCInteract = true;
+                TutorialPopupManager.Instance.ShowPopup("Press E to Interact.");
+            }
         }
     }
 
